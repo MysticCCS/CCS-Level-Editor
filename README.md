@@ -23,6 +23,8 @@ New update in this version! We added some game mode.
 ![Alt text](https://cdn.discordapp.com/attachments/422795969449558016/1144993822313549845/Screenshot_2023-08-26_alle_15.56.31.png)
 
 ***************************
+Now website has new domain at candycrushgemer.github.com!
+***************************
 CREDITS:
 
 We are grateful for the permission to reproduce the following materials:
