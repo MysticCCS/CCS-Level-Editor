@@ -112,12 +112,7 @@ td .candy_cannon {
     padding: 0;
     width: 100%;
     height: 40px;
-    background: repeating-linear-gradient(
-        45deg,
-        #f1c0dc,
-        #f1c0dc 10px,
-        #f0aad0 10px,
-        #f0aad0 20px
+    background: url("https://cdn.discordapp.com/attachments/1002798870553698358/1146007621942390844/Picsart_23-08-29_16-04-54-235.png");
       );
     border: 2px solid;
     margin: 0;
