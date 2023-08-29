@@ -246,17 +246,20 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
 
 .sideoptions {
     text-align:center;
-    background: repeating-linear-gradient(
-        45deg,
-        #dba5c4,
-        #dba5c4 10px,
-        #cc83ab 10px,
-        #cc83ab 20px
-      );
+    background-image: url("https://cdn.discordapp.com/attachments/1002798870553698358/1146007621942390844/Picsart_23-08-29_16-04-54-235.png");
+    background-size: cover;
+    background-color: #00000000;
+    background-position: center;
+    background-size: 120%;
     border: none;
     min-height: 45px;
     padding: 10px;
     margin: 0;
+      );
+    border: none;
+    min-height: 45px;
+    padding: 10px;
+    margin: 0; 
 
     text-align: left;
     text-decoration: none;
