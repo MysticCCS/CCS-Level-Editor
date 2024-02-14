@@ -2,6 +2,22 @@ table, td, tr {
     padding: 0;
 }
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  // Your Material UI theme customizations here
+});
+
+function MyComponent() {
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="your-css-classes">
+        {/* Your HTML elements */}
+      </div>
+    </ThemeProvider>
+  );
+}
+
 @font-face {
     font-family: "DroidSans";
     src: url(fonts/DroidSans_new.ttf);
