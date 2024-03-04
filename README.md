@@ -27,8 +27,6 @@ Now website has new domain at candycrushgemer.github.com!
 ***************************
 CREDITS:
 
-We are grateful for the permission to reproduce the following materials:
-
 This editor was made by Blaki. You may feel free to fork it and do what you like with it as long as you credit me and King.
 
 All other info below does not need to be included.
