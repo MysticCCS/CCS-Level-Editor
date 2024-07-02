@@ -20,7 +20,7 @@ New update in this version! We added some game mode.
 - Rainbow Rapids Jelly.
 - Rainbow Rapids Order.
 2. New look of the editor!
-![Alt text](https://cdn.discordapp.com/attachments/422795969449558016/1144993822313549845/Screenshot_2023-08-26_alle_15.56.31.png)
+![Alt text](https://cdn.discordapp.com/attachments/1190963881942728708/1257525712311685120/image.png?ex=6684b995&is=66836815&hm=d3dc956fabbb35f95b55486df26cf21c9e1c7c360f7fedd421984e3a503a1352&)
 
 ***************************
 Now website has new domain at candycrushgemer.github.com!
