@@ -9,10 +9,29 @@ New update in this version! We added some sweet features
 ****************************
 # Changelog
 Editor has a new fresh look - Material 3
+
 We updated the look to make the navagation more easier and sweeter
+
 Things to do:
+
 Background image coming soon!!!
+
 Gumball Machine
+
+Available:
+
+Web - https://candycrushgemer.github.io/CCS-Level-Editor
+
+Android: check release page 
+****************************
+# How to install APK???
+
+1. Download the APK
+2. Open the APK
+3. Tap "Install"
+4. Done, log in or sign up to use
+
+IOS COMING SOON
 ****************************
 # CREDITS:
 
