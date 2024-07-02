@@ -1,6 +1,12 @@
 <html>
     <!-- Download stuff -->
     <head>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+		<style>
+		body {
+			font-family: 'Roboto';font-size: 22px;
+		}
+		</style>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <script type="importmap">
             {
@@ -34,31 +40,37 @@
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />
+		<style>
+		.button {height: 10px;}
+		</style>
     </head>
-
     <body>
         <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
         <script src="script.js" defer></script>
 
-        <img src="backgrounds/RM_w1_bg.png" id="background" draggable="false"></img>
+        <img src="backgrounds/10k_bg.png" id="background" draggable="false"></img>
 
         <div id="main">
             <div class="navbar">
                 <div style="display: flex; height: 100%;">
                     <div class="navbarflex">
-                        <md-filled-tonal-button onclick="document.getElementById('creditsmenu').style.display = 'block'" onclick=""><small>👋🏻🍬</small>Credits </md-filled-tonal-button>
-                        <md-filled-tonal-button onclick="window.open('https://github.com/Blakiemon/Candy-Crush-Level-Editor')" style="margin: auto; display: block;" onclick=""><small>🍴</small>Fork On Github</md-filled-tonal-button>
-                        <md-filled-tonal-button onclick="window.open('https://discord.gg/37ND6RwjXM')"><img style="max-width: 16px;" src="data:image/jpeg;base64,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
-">Editor Support Server</md-filled-tonal-button>
+                        <md-filled-tonal-button onclick="document.getElementById('creditsmenu').style.display = 'block'" onclick="">Credits</md-filled-tonal-button>
+                        <md-filled-tonal-button style="margin-left: 10px; margin-right: 10px;" onclick="window.open('https://github.com/candycrushgemer/CCS-Level-Editor') onclick="">Fork On Github</md-filled-tonal-button>
+                        <md-filled-tonal-button onclick="window.open('https://discord.gg/37ND6RwjXM')">Editor Support Server</md-filled-tonal-button>
+						<style>
+						:root {
+							--md-sys-color-secondary-container: #FFBDFB;
+							--md-sys-color-on-secondary-container: #800078;
+						}
+						</style>
                     </div>
                     <div class="navbarflex">
                     </div>
                     <div class="navbarflex">
-                        <md-filled-tonal-button style="margin: auto; display: block;" onclick="window.open('game.html?sdkPort=:443&cdnHost=k1.midasplayer.com&level=' + JSON.stringify(exportLevel()), '_blank')">Test Level</md-filled-tonal-button>
-                        <button style="margin: auto; display: block;" onclick="exportLevelUI()">⏏ Export Level</button>
-                        <button style="margin: auto; display: block;" onclick="displayImportLevelUI()"><small>⤵</small> Import Level</button>
-                    </div>:
+                        <md-filled-tonal-button style="color: #f0aad0; margin-left: 20px; margin-right: 20px;" onclick="exportLevelUI()">⏏ Export Level</md-filled-tonal-button>
+                        <md-filled-tonal-button onclick="displayImportLevelUI()"><small>⤵</small>⤵️ Import Level</md-filled-tonal-button>
+                    </div>
                 </div>
             </div>
             <div class="sideselectionright">
@@ -160,12 +172,25 @@
                     </label>
                 </div>
                 <div class="sideoptions" id="moves-section">
-                    <label for="moves" class='DroidSans' style="margin: 10px; display: block; color: #5e2232; text-align: center;">Moves:</label>
-                    <input style="width: 50px; text-align: center;" placeholder="20" type="number" name="moves" id="moves" name="moves"><br>
+                    <label for="moves" class='DroidSans' style="margin: 10px; display: block; color: #ffffff; text-align: center;">Moves:</label>
+                    <md-filled-text-field style="width: 100px; height: 50px; text-align: left;" placeholder="20" type="number" name="moves" id="moves" name="moves"></md-filled-text-field><br>
                 </div>
                 <div class="sideoptions" id="time-section" style="display: none;">
-                    <label for="time" class='DroidSans' style="margin: 10px; display: block; color: #5e2232; text-align: center;">Time (seconds):</label>
-                    <input style="width: 50px; text-align: center;" placeholder="30" type="number" name="moves" id="time" name="time"><br>
+                    <label for="time" class='DroidSans' style="margin: 10px; display: block; color: #ffffff; text-align: center;">Time (seconds):</label>
+                    <md-filled-text-field style="width: 100px; height: 50px; text-align: left;" label="30" type="number" name="time" id="time" name="time"><br>
+					<style>
+					width: 100px;
+					height: 50px;
+					text-align: left;
+					:root {
+						--md-filled-text-field-container-shape: 0px;
+						--md-sys-typescale-body-large: 400 1rem system-ui;
+						--md-sys-color-primary: #FF00EF;
+						--md-sys-color-surface-container-highest: #CFBACD;
+						--md-filled-text-field-label-text-color: #6B0064;
+						--md-fileld-text-field-input-text-color: #000000;
+					}
+					</style>
                 </div>
 
                 <div class="sidetitle">
@@ -197,28 +222,40 @@
                 </div>
                 <div class="sideoptions">
                     <img src="ui/hud/hud_scoreStar_red.png" style="max-width: 30px; max-height: 30px;"> 
-                    <p class="DroidSans" style="margin: 10px; display: block; color: #5e2232; text-align: center;">Star 1:</p> 
+                    <p class="DroidSans" style="margin: 10px; display: block; color: #ffffff; text-align: center;">Star 1:</p> 
                     <input style="width: fit-content; text-align: center;" placeholder="1000" type="number" id="star1">
                     <div class="break"></div> 
                     <img src="ui/hud/hud_scoreStar_green.png" style="max-width: 30px; max-height: 30px;"> 
-                    <p class="DroidSans" style="margin: 10px; display: block; color: #5e2232; text-align: center;">Star 2:</p> 
+                    <p class="DroidSans" style="margin: 10px; display: block; color: #ffffff; text-align: center;">Star 2:</p> 
                     <input style="width: fit-content; text-align: center;" placeholder="2000" type="number" id="star2">
                     <div class="break"></div> 
                     <img src="ui/hud/hud_scoreStar_yellow.png" style="max-width: 30px; max-height: 30px;"> 
-                    <p class="DroidSans" style="margin: 10px; display: block; color: #5e2232; text-align: center;">Star 3:</p> 
+                    <p class="DroidSans" style="margin: 10px; display: block; color: #ffffff; text-align: center;">Star 3:</p> 
                     <input style="width: fit-content; text-align: center;" placeholder="3000" type="number" id="star3">
                 </div>
                 <div class="sideoptions">
-                    <label for="moves" class='DroidSans' style="margin: 10px; display: block; color: #5e2232; text-align: center;">Disable Starting Boosters:</label>
-                    <input style="text-align: center;" type="checkbox" name="disablebooster" id="disablebooster">
+                    <label for="moves" class='DroidSans' style="margin: 10px; display: block; color: #ffffff; text-align: center;">Disable Starting Boosters:</label>
+                    <md-checkbox style="text-align: center;" name="disablebooster" id="disablebooster">
+					<style>
+						:root {
+							/* System tokens */
+							--md-sys-color-primary: #fa41a7
+						}
+					</style>
                 </div>
 
                 <div class="sidetitledream">
                     <p class='MergePro' style="font-weight: bold; text-align: center; color: #ffffff;">Dreamworld:</p>
                 </div>
                 <div class="sideoptionsdream">
-                    <label for="isOwlModeEnabled" class='DroidSans' style="margin: 10px; display: block; color: #ffffff; text-align: center;">Dreamworld Level?</label>
-                    <input style="text-align: center;" type="checkbox" name="isOwlModeEnabled" id="isOwlModeEnabled" onchange="toggleDreamworld(this)">
+                    <label for="isOwlModeEnabled" class='DroidSans' style="margin: 10px; display: block; color: #ffffff; text-align: center;">Dreamworld Level</label>
+                    <md-checkbox style="text-align: center;" type="checkbox" name="isOwlModeEnabled" id="isOwlModeEnabled" onchange="toggleDreamworld(this)">
+					<style>
+						:root {
+							/* System tokens */
+							--md-sys-color-primary: #6a00ff;
+						}
+					</style>
                 </div>
                 <div class="sideoptionsdream" id="dreamworldoptions" style="display: none;">
                     <label for="initialMovesUntilMoonStruck" class='DroidSans' style="margin: 10px; display: block; color: #ffffff; text-align: center;">Moves Until Moonstruck</label>
@@ -230,14 +267,14 @@
                 </div>
                 <div id="requirements-options-section" style="display: none;">
                     <div class="sidetitle">
-                        <p class='MergePro' style="font-weight: bold; color: #5e2232; text-align: center;">Requirements:</p>
+                        <p class='MergePro' style="font-weight: bold; color: #5e2232; text-align: center;">Requirements (sorry for the glitch button):</p>
                     </div>
                     <div class="sidetitle" style="display: flex;">
-                        <button style="margin-right: auto; margin-left: auto; display: block; height: fit-content;" onclick="addRequirement()" id="addorder">Add Order</button>
-                        <button style="margin-right: auto; margin-left: auto; display: block; height: fit-content;" onclick="addRequirement(true)" id="addingredient">Add Ingredient</button>
+                        <md-filled-button style="margin-right: auto; margin-left: auto;" onclick="addRequirement()" id="addorder">Add Order</md-filled-button>
+                        <md-filled-button style="margin-right: auto; margin-left: auto;" onclick="addRequirement(true)" id="addingredient">Add Ingredient</md-filled-button>
                     </div>
                     <div style="min-height: 40px; display: none;" id="requirementwarning">
-                        <p class='DroidSans' style="font-weight: bold; color: red; text-align: center;">You can only have 3 requirements at a time.</p>
+                        <p class='DroidSans' style="font-weight: bold; color: red; text-align: center;">You can only have 3 requirements at a time!</p>
                     </div>
                     <div id="requirements">
                     </div>
@@ -252,13 +289,13 @@
                                 <!-- <p class='MergePro' style="font-weight: bold; color: #5e2232; text-align: center;">Amount:</p> -->
                             </td>
                             <td>
-                                <p class='MergePro' style="font-weight: bold; color: #5e2232; text-align: center;">Max:</p>
+                                <p class='MergePro' style="font-weight: bold; color: #ffffff; text-align: center;">Max:</p>
                             </td>
                             <td>
-                                <p class='MergePro' style="font-weight: bold; color: #5e2232; text-align: center;">Interval:</p>
+                                <p class='MergePro' style="font-weight: bold; color: #ffffff; text-align: center;">Interval:</p>
                             </td>
                             <td>
-                                <p class='MergePro' style="font-weight: bold; color: #5e2232; text-align: center;">Tick:</p>
+                                <p class='MergePro' style="font-weight: bold; color: #ffffff; text-align: center;">Tick:</p>
                             </td>
                         </tr>
                         <tr class="cannonpref" elm="fallingIcing" image="elements/cannon_block_waffle.png" tick="Level"></tr>
@@ -282,13 +319,13 @@
                                 <img class="elmimg" style="max-width: 70%;" src="elements/cannon_ingredient.png"> 
                             </td> 
                             <td> 
-                                <input class="max" style="width: 50px; text-align: center;" placeholder="0" type="number" id="maxNumIngredientsOnScreen">
+                                <md-filled-text-field class="max" style="width: 70px; height: 45px; text-align: left;" placeholder="0" type="number" id="maxNumIngredientsOnScreen">
                              </td> 
                              <td> 
-                                 <input class="spawn" style="width: 50px; text-align: center;" placeholder="0" type="number" id="ingredientSpawnDensity"> 
+                                 <md-filled-text-field class="spawn" style="width: 70px; height: 45px; text-align: left;" placeholder="0" type="number" id="ingredientSpawnDensity"> 
                                 </td> 
                                 <td> 
-                                    <!-- <input class="tick" style="width: 50px; text-align: center;" placeholder="0" type="number" id="shieldLevel">  -->
+                                    <!-- <md-filled-text-field class="tick" style="width: 70px; height: 45px; text-align: left;" placeholder="0" type="number" id="shieldLevel">  -->
                                 </td>
                         </tr>
                     </table>
@@ -306,7 +343,7 @@
                         <p class='DroidSans' style="margin: 10px; display: block; color: #5e2232; text-align: center;">Spawn Interval:</p>
                         <input type="number" style="margin-left: 40%; width: 20%; text-align: center;"" id="evilSpawnerInterval" placeholder="0" title="Spawn Interval">
                         <div class="break"></div>
-                        <button style="margin-right: auto; margin-left: auto; display: block; height: fit-content;" onclick="addMixerOption()" id="addmixer">Add Mixer Blocker</button>
+                        <md-filled-tonal-button onclick="addMixerOption()" id="addmixer">Add Mixer Blocker</md-filled-tonal-button>
                     </div>
                     <div id="mixeroptions">
                     </div>
@@ -318,14 +355,14 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="colordrop">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Colors</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="colordrop" style="display:none">
                         <button class="colorselected" onclick="updateColor(this, 'random')">
                             <img class="selectionimage" src="elements/random_ui.png">
                         </button>
-                        <div class="selectcolor" color="red"></div>
+						<div class="selectcolor" color="red"></div>
                         <div class="selectcolor" color="yellow"></div>
                         <div class="selectcolor" color="blue"></div>
                         <div class="selectcolor" color="green"></div>
@@ -336,7 +373,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="candy">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Candy</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="candy" style="display:none">
@@ -364,7 +401,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="frogss">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Frog</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="frogss" style="display:none">
@@ -376,7 +413,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="tiles">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Tiles</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="tiles" style="display:none">
@@ -396,7 +433,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="blockers">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Blockers</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="blockers" style="display:none">
@@ -449,7 +486,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="locks">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Locks</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="locks" style="display:none">
@@ -468,7 +505,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="shields">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Shields</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="shields" style="display:none">
@@ -480,7 +517,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="spawning">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Candy Cannon</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="spawning" style="display:none">
@@ -513,7 +550,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="ingredients">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Ingredients</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="ingredients" style="display:none">
@@ -525,7 +562,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="mixers">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Mixers</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="mixers" style="display:none">
@@ -539,7 +576,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="walls">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Walls</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="walls" style="display:none">
@@ -660,7 +697,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="bonbon">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Bon Bon Blitz</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="bonbon" style="display:none">
@@ -689,7 +726,7 @@
                     <button class="dropdown" onclick="toggleDropdown(this)" associd="path">
                         <div style="display: flex; justify-content: space-between;">
                             <p class='MergePro' style="padding-left: 5%; ">Rainbow Rapid Paths</p>
-                            <p class="arrow" style="display: inline; padding-right: 5%; transform: rotate(90deg);">&raquo</p>
+                            <p class="arrow">▼</p>
                           </div>
                     </button>
                     <div class="dropped" id="path" style="display:none">
@@ -711,6 +748,39 @@
                         <div class="selectelement" element="rainbow_stream_intersection_point" gamelayer="path"></div>
                         
                     </div>
+					<p class="Roboto">Change background image:</p>
+					<md-filled-select width="20px">
+						<md-select-option selected value="Please select">
+							<div slot="headline">Please select</div>
+						</md-select-option>
+						<md-select-option value="10k_bg">
+							<div slot="headline">10K Celebrate</div>
+						</md-select-option>
+						<md-select-option value="w1_bg">
+							<div slot="headline">CC solitaire theme</div>
+						</md-select-option>
+						<md-select-option value="champrace_bg">
+							<div slot="headline">Champrace</div>
+						</md-select-option>
+						<md-select-option value="RM_w1_bg">
+							<div slot="headline">CCS Ep1</div>
+						</md-select-option>
+						<md-select-option value="RM_w2_bg">
+							<div slot="headline">CCS Ep2</div>
+						</md-select-option>
+					</md-filled-select>
+					<p class="Roboto">Sorry these option didn't work ;) We just place here for developing purpose</p>
+					<style>
+					:root {
+						--md-outlined-select-text-field-outline-color: #ff008c;
+						--md-outlined-select-text-field-input-text-color: #ffffff;
+						--md-outlined-select-background-color: #ffffff;
+					}
+					
+					md-outlined-select::part(menu) {
+						--md-menu-container-color: #fbf4f6;
+					}
+					</style>
                 </div>
             </div>
 
@@ -720,41 +790,43 @@
         </div>
 
         <div id="exportmenu" style="display: none;">
-            <div class="popup">
-                <button onclick="document.getElementById('exportmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; background-color: rgb(174, 174, 174); width: 30px; height: 30px">X</button>
-                <label for="exportfield" class='MergePro' style="margin: 0; width: 50%; height: 20px; border-radius: 10px; background-color: #353535; padding:0; display: block; color: #ffffff; text-align: center;">Exported Data:</label>
-                <textarea id="exportfield" name="exportfield" style="background-color: #464646; border: 2px solid #353535; width: 90%; height: 70%; resize: none; color: #ffffff;" readonly></textarea>
+            <div class="popup" style="background-color: rgb(255, 255, 255);">
+                <md-icon-button onclick="document.getElementById('exportmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; background-color: rgb(255, 255, 255); width: 30px; height: 30px"><md-icon>×</md-icon></md-icon-button>
+                <label for="exportfield" class='MergePro' style="margin: 0; width: 50%; height: 20px; border-radius: 10px; padding: 0; display: block; color: #000000; text-align: center;">Export Successfully!</label>
+                <md-outlined-text-field type="textarea" id="exportfield" name="exportfield" style="--md-sys-color-primary: #ff006a; --md-outlined-text-field-label-text-color: #000000; --md-outlined-text-field-input-text-color: #000000; width: 400px; height: 250px; resize: vertical; color: #ffffff;" label="Export" readonly></md-outlined-text-field>
             </div>
         </div>
         <div id="importmenu" style="display: none;">
-            <div class="popup" style="width: 30%; left: 35%;">
-                <button onclick="document.getElementById('importmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; background-color: rgb(174, 174, 174); width: 30px; height: 30px">X</button>
-                <label for="importfield" class='MergePro' style="margin: 0; width: 50%; height: 20px; border-radius: 10px; background-color: #353535; padding:0; display: block; color: #ffffff; text-align: center;">Type In Level Code:</label>
+            <div class="popup" style="width: 30%; left: 35%; background-color: rgb(255, 255, 255);">
+                <md-icon-button onclick="document.getElementById('importmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; width: 30px; height: 30px"><md-icon>×</md-icon></md-icon-button>
+                <label for="importfield" class='MergePro' style="margin: 0; width: 50%; height: 20px; border-radius: 10px; padding:0; display: block; color: #000000; text-align: center;">Type In Level Code:</label>
                 <div class="break"></div>
-                <textarea id="importfield" name="importfield" style="background-color: #464646; border: 2px solid #353535; width: 70%; height: 70%; resize: none; color: #ffffff;"></textarea>
+                <md-outlined-text-field label="Level Code" type="textarea" id="importfield" name="importfield" style="--md-sys-color-primary: #ff006a; --md-outlined-text-field-label-text-color: #000000; --md-outlined-text-field-input-text-color: #000000; height: 200px; width: 450px; resize: none;"></md-outlined-text-field>
                 <div class="break"></div>
-                <button onclick="importLevelUI()" style="border-radius: 5px; background-color: rgb(174, 174, 174); width: 30%; font-size: 1.1em;">Import Level</button>
+                <md-filled-tonal-button onclick="importLevelUI()" style="border-radius: 5px; background-color: rgb(174, 174, 174); width: 30%; font-size: 1.1em;">Import Level</md-filled-tonal-button>
                 <div class="break"></div>
-                <p class="MergePro" id="importerror" style="color: red; display: none; width: fit-content; height: fit-content;">Error: bruh</p>
+                <p class="MergePro" id="importerror" style="color: red; display: none; width: fit-content; height: fit-content;">Error while reading data! Please check!</p>
             </div>
         </div>
         <div id="creditsmenu" style="display: none;">
-            <div class="popup" style="height: 70%">
-                <button onclick="document.getElementById('creditsmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; background-color: rgb(174, 174, 174); width: 30px; height: 30px">X</button>
-                <p class='MergePro' style="margin: 0; width: 50%; height: 20px; border-radius: 10px; background-color: #353535; padding:0; display: block; color: #ffffff; text-align: center;">Candy Crush Level Editor Credits:</p>
-                <p class="MergePro" style="color: lightcoral; width: fit-content; height: fit-content; text-align: center;">All right go to King Limited. <br>If they so chose this editor may be taken down at any time.</p>
-                <p class="DroidSans" style="color:honeydew; width: 80%; text-align: center; vertical-align: middle; background-color: #353535;  border-radius: 10px; display: inline-block;"><br>This editor was made by Blaki. You may feel free to fork it and do what you like with it as long as you credit me and King. <br><br>All other info below does not need to be included.<br>ㅤ</p>
+            <div class="popup" style="height: 70%; background-color: rgb(255, 255, 255);">
+                <md-icon-button onclick="document.getElementById('creditsmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; width: 30px; height: 30px"><md-icon>×</md-icon></md-icon-button>
+                <p class="Roboto" style="margin: 0; width: 50%; height: 20px; border-radius: 10px; padding: 0; display: block; color: #000000; text-align: center;">Candy Crush Level Editor Credits:</p>
+                <p class="Roboto" style="color: red; width: fit-content; height: fit-content; text-align: center;">Copyright (c) 2024. King Limited<br>If they choose this editor as their editor, this site may be taken down at any time.</p>
+                <p class="Roboto" style="color: #000000; width: 80%; text-align: center; vertical-align: middle; background-color: #e3e3e3; border-radius: 10px; display: inline-block;"><br>Welcome to Candy Crush Saga Level Editor! This is a free software, just enjoy using it! But, you use this software as mean as you agree to credit:<br><br>Blakiemon, candycrushgemer, Fence<br><br> There may be a lot of bugs! Rate us and don't hesitate to talk with us!</p>
                 <div class="break"></div>
                 <div class="break"></div>
-                <p style="color:navajowhite; width: 80%; text-align: center;">Come join the support server if you have any quality of life suggestions or bugs to share.</p>
-                <button onclick="window.open('https://discord.gg/37ND6RwjXM')"><img style="max-width: 16px;" src="data:image/jpeg;base64,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
-">Editor Support Server</button>
+                <p style="color: #001eff; width: 80%; text-align: center;">If you have any problem, please send to us at Discord server. Don't say hello, just say your problem!</p>
+                <md-filled-tonal-button onclick="window.open('https://discord.gg/37ND6RwjXM')"><img style="max-width: 16px;" src="data:image/jpeg;base64,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
+">Editor Support Server</md-filled-tonal-button>
                 <div class="break"></div>
-                <p style="color:navajowhite; width: 80%; text-align: center;">Or if you like my work, follow me on social media to see what else I've made.</p>
-                <div class="break"></div>
-                <button onclick="window.open('https://twitter.com/Blakiemon')"><img style="max-width: 16px;" src="https://abs.twimg.com/favicons/twitter.2.ico">My Twitter</button>
-                <button onclick="window.open('https://www.reddit.com/user/Zouten')"><img style="max-width: 16px;" src="https://www.redditstatic.com/desktop2x/img/favicon/ms-icon-144x144.png">My Reddit</button>
-                <button onclick="window.open('https://github.com/Blakiemon')"><img style="max-width: 16px;" src="https://github.githubassets.com/favicons/favicon.png">My Github</button>
             </div>
+		</div>
+			<div id="settings" style="display: none;">
+				<div class="popup" style="height: 70%; background-color: rgb(255, 255, 255);">
+					<p class="Roboto" style="margin: 0; width: 50%; height: 20px; border-radius: 10px; padding: 0; display: block; color: #000000; text-align: center;">Settings</p>
+					<md-icon-button style="position: absolute; right: 20; top: 20; border-radius: 10px; width: 30px; height: 30px"><md-icon>×</md-icon></md-icon-button>
+					<p class="Roboto" style="margin: 0; width: 50%; height: 20px; border-radius: 10px; padding: 0; display: block; color: #000000; text-align: center;">Change background theme:</p>
+					<img src="background/10k_bg.png" alt="Background1" width="64" height="64">
         </div>
     </body>
