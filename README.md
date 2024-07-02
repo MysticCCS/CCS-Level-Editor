@@ -18,11 +18,11 @@ Background image coming soon!!!
 
 Gumball Machine
 
-Available:
+**Available:**
 
-Web - https://candycrushgemer.github.io/CCS-Level-Editor
+**Web** - https://candycrushgemer.github.io/CCS-Level-Editor
 
-Android: check release page 
+**<green>Android</green>**: check release page 
 ****************************
 # How to install APK???
 
