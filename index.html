@@ -4,7 +4,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 		<style>
 		body {
-			font-family: 'Roboto'; font-size: 22px;
+			font-family: 'Roboto';font-size: 22px;
 		}
 		</style>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -51,11 +51,6 @@
 
         <img src="backgrounds/10k_bg.png" id="background" draggable="false"></img>
 
-	<md-tabs>
-	    <md-primary-tab>Main</md-primary-tab>
-	    <md-primary-tab>Play</md-secondary-tab>
-	</md-tabs>
-	    
         <div id="main">
             <div class="navbar">
                 <div style="display: flex; height: 100%;">
@@ -798,7 +793,20 @@
             <div class="popup" style="background-color: rgb(255, 255, 255);">
                 <md-icon-button onclick="document.getElementById('exportmenu').style.display = 'none'" style="position: absolute; right: 20; top: 20; border-radius: 10px; background-color: rgb(255, 255, 255); width: 30px; height: 30px"><md-icon>×</md-icon></md-icon-button>
                 <label for="exportfield" class='MergePro' style="margin: 0; width: 50%; height: 20px; border-radius: 10px; padding: 0; display: block; color: #000000; text-align: center;">Export Successfully!</label>
-                <md-outlined-text-field type="textarea" id="exportfield" name="exportfield" style="--md-sys-color-primary: #ff006a; --md-outlined-text-field-label-text-color: #000000; --md-outlined-text-field-input-text-color: #000000; width: 400px; height: 250px; resize: vertical; color: #ffffff;" label="Export" readonly></md-outlined-text-field>
+                <md-outlined-text-field type="textarea" id="exportfield" name="exportfield" style="--md-sys-color-primary: #ff006a; --md-outlined-text-field-label-text-color: #000000; --md-outlined-text-field-input-text-color: #000000; width: 550px; height: 250px; resize: vertical; color: #ffffff;" label="Export" readonly></md-outlined-text-field>
+				<md-filled-button style="--md-sys-color-primary: #ff00b3;" onclick="saveText()">Save</md-filled-button>
+				<script>
+				    function saveText() {
+						const textField = document.getElementById('exportfield');
+						const text = textField.value;
+						const blob = new Blob([text], { type: 'text/plain' });
+						const url = window.URL.createObjectURL(blob);
+						const link = document.createElement('a');
+						link.href = url;
+						link.download = 'level.txt';
+						link.click();
+					}
+				</script>
             </div>
         </div>
         <div id="importmenu" style="display: none;">
