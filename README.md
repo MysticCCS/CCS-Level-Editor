@@ -32,6 +32,7 @@ Gumball Machine
 4. Done, log in or sign up to use
 
 IOS COMING SOON
+Itch.io: https://candycrushgemer.itch.io/ccs-level-editor
 ****************************
 # CREDITS:
 
