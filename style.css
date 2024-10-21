@@ -3,7 +3,7 @@
     src: url(fonts/Roboto/Roboto-Regular.ttf);
 }
 
-* {
+p, span, label, * {
     font-family: Roboto;
 }
 
