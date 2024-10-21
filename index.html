@@ -48,6 +48,9 @@
               <md-icon-button class="import-main" alt="Import" onclick="displayImportLevelUI()">
                   <md-icon>download</md-icon>
               </md-icon-button>
+              <md-icon-button class="settings-btn" alt="Settings">
+                <md-icon>settings</md-icon>
+            </md-icon-button>
               <md-filled-tonal-button class="export-button" onclick="exportLevelUI()">Export level</md-filled-tonal-button>
             </mdui-top-app-bar>
           
@@ -770,7 +773,7 @@
                         <md-filled-text-field id="export-name" style="width: 510px;" label="Set your file name" suffix-text=".txt"></md-filled-text-field>
                     </div>
                     <md-text-button slot="action" class="close-btn" form="form-id">Close</md-text-button>
-                    <md-filled-tonal-button slot="action" form="form-id" onclick="saveExport()">Save</md-filled-tonal-button>
+                    <md-filled-tonal-button class="save-file" slot="action" form="form-id" onclick="saveExport()">Save</md-filled-tonal-button>
                 </mdui-dialog>
                 <mdui-dialog close-on-overlay-click class="import-dialog">
                     <div slot="headline">
@@ -809,6 +812,44 @@
                     </div>
                     <md-filled-button slot="action" class="ok-btn">OK</md-filled-button>
                 </mdui-dialog>
+                <mdui-dialog close-on-overlay-click class="settings-dialog">
+                    <div slot="headline">
+                        Settings
+                    </div>
+                    <div class="body">
+                        <mdui-layout>
+                            <mdui-layout-main class="example-layout-main" style="min-height: 200px; width: 1200px;">
+                                <label>
+                                    Change background image:
+                                    <br><br>
+                                    <md-filled-select>
+                                        <md-select-option aria-label="blank"></md-select-option>
+                                        <md-select-option selected value="10k">
+                                          <div slot="headline">10K Celebrate</div>
+                                        </md-select-option>
+                                        <md-select-option value="solitaire">
+                                            <div slot="headline">CC Solitaire background</div>
+                                          </md-select-option>
+                                        <md-select-option value="ep1">
+                                          <div slot="headline">CCS Ep1 Bg</div>
+                                        </md-select-option>
+                                    </md-filled-select>
+                                    <br><br>
+                                </label>
+                                <label style="display: flex; place-items: center; gap: 80%;">
+                                    Dark mode
+                                    <md-switch disabled></md-switch>
+                                </label>
+                                <br>
+                                <md-text-button onclick="window.open('https://forms.gle/98bBg4Vwgj2PDT6T6')" style="border-radius: 4px;" trailing-icon>
+                                    Send bugs
+                                    <svg slot="icon" viewBox="0 0 48 48"><path d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h13.95v3H9v30h30V25.05h3V39q0 1.2-.9 2.1-.9.9-2.1.9Zm10.1-10.95L17 28.9 36.9 9H25.95V6H42v16.05h-3v-10.9Z"/></svg>
+                                </md-text-button>
+                            </mdui-layout-main>
+                        </mdui-layout>
+                    </div>
+                    <md-filled-button slot="action" class="apply-btn">OK</md-filled-button>
+                </mdui-dialog>
             </mdui-layout-main>
         <style>
             .example-top-app-bar {
@@ -846,7 +887,15 @@
             const okButton = document.querySelector('.ok-btn');
 
             creditButton.addEventListener("click", () =>  creditDialog.open = true);
-            okButton.addEventListener("click", () => creditDialog.open = false)
+            okButton.addEventListener("click", () => creditDialog.open = false);
+
+            // Open  Settings
+            const settingsDialog = document.querySelector('.settings-dialog');
+            const settingsButton = document.querySelector('.settings-btn');
+            const closeSettings = document.querySelector('.apply-btn');
+
+            settingsButton.addEventListener("click", () =>  settingsDialog.open = true);
+            closeSettings.addEventListener("click", () => settingsDialog.open = false)
 
             // Function to close the export dialog
             function closeExportDialog() {
@@ -857,6 +906,17 @@
                     console.error("Dialog element not found");
                 }
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Find the element with class 'save-file'
+                var saveButton = document.querySelector('.save-file');
+                
+                if (saveButton) {
+                    saveButton.addEventListener('click', function() {
+                        saveExport();
+                    });
+                }
+            });
 
             function saveExport() {
                 console.log("saveExport function called");
@@ -870,6 +930,19 @@
                     return;
                 }
                 
+                // Get the file name from the export-name field
+                var fileName = document.getElementById("export-name").value.trim();
+                
+                // If the file name is blank, use the default
+                if (!fileName) {
+                    fileName = "level.txt";
+                } else if (!fileName.toLowerCase().endsWith('.txt')) {
+                    // Ensure the file has a .txt extension
+                    fileName += '.txt';
+                }
+                
+                console.log("File name:", fileName);
+                
                 // Create a Blob with the content
                 var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
                 
@@ -879,7 +952,7 @@
                 // Create a temporary anchor element
                 var a = document.createElement("a");
                 a.href = url;
-                a.download = "level.txt";
+                a.download = fileName;
                 
                 console.log("Triggering download");
                 
