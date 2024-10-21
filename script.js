@@ -999,12 +999,26 @@ function importLevelUI(){
         document.getElementById("importmenu").style.display = "none"
     }
     catch(err) {
-        //alert(err.stack)
         let errorPara =  document.getElementById("importerror")
         errorPara.style.display = "block"
-        errorPara.innerHTML = err
+        
+        // Use custom error messages
+        if (err instanceof SyntaxError) {
+            errorPara.textContent = ERROR_MESSAGES.JSON_PARSE;
+        } else {
+            errorPara.textContent = ERROR_MESSAGES.IMPORT_FAILED;
+        }
+        
+        // If you still want to log the original error for debugging:
+        console.error(err);
     }
 }
+
+const ERROR_MESSAGES = {
+    JSON_PARSE: "Failed to import level! Double-check your code, then try again.",    
+    IMPORT_FAILED: "Failed to import level! Double-check your code, then try again.",
+    // Add more custom error messages as needed
+};
 
 function exportLevel(){
     let levelArray = []
