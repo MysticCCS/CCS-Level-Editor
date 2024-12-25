@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Download stuff-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+        "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+        }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <!--Accent Color Scheme-->
+    <script type="module">
+        import { setColorScheme } from 'mdui/functions/setColorScheme.js';
+    
+        // Generate a color scheme based on #0061a4 and set the <html> element to that color scheme
+        setColorScheme('#ff0055');
+    </script>
+    <link rel="stylesheet" href="accent.css">
+    <!--Google Sans Text-->
+    <link rel="stylesheet" href="font.css">
+    <!--Dreamworld CSS-->
+    <link rel="stylesheet" href="dreamworld.css">
+
+    <!--General Information-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your own Candy Crush Saga level using this tool">
+    <meta name="keywords" content="ccs, candy crush saga, level creator, level editor">
+    <meta name="author" content="Candy Crush Gemer">
+    <title>Level Editor</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <mdui-layout>
+        <mdui-top-app-bar class="top-app-bar">
+            <mdui-top-app-bar-title>Level Editor</mdui-top-app-bar-title>
+            <div style="flex-grow: 1;"></div>
+            <mdui-button-icon icon="format_paint--outlined"></mdui-button-icon>
+            <mdui-button-icon icon="account_circle--outlined"></mdui-button-icon>            
+        </mdui-top-app-bar>
+      
+        <mdui-layout-main class="example-layout-main" style="height: 97vh; margin-left: 20px; margin-right: 20px; margin-top: 20px; overflow-x: hidden;">
+            <div>
+                <br>
+                <span style="font-size: 55px; display: flex; place-items: center; width: 100%; gap: 100px; margin-left: 20px;">
+                    <div class="introduce">
+                        <span>Let your imagination and creativity <br> turn into a Candy Crush Saga level <br></span>
+                        <span style="font-size: 20px; margin: 0;">Make your favorite games even better with this tool, with your imagination and creativity!</span>
+                        <br><br>
+                        <md-outlined-button>Try using Level Editor today</md-outlined-button>
+                    </div>
+                    <img src="intr1.png" alt="Introduction 1" width="770px" style="text-align: right; margin-right: 60px;">
+                </span>
+            </div>
+            
+            <h1 style="text-align: center;">Key features</h1>
+            <p style="text-align: center;">This tool provides you features that help you create a perfect level for you.</p>
+            <div class="key-features" style="display: flex; gap: 20px; justify-content: center;">
+                <mdui-card style="padding: 15px; width: 500px; border-radius: 30px;">
+                    <h2>Live preview with tile board</h2>
+                    <p>Making levels requires a preview board game to help designers see how it would appear in the game.</p>
+                    <img src="kp-board.png" width="100%" alt="Live preview with tile board" style="border-radius: 20px;">
+                </mdui-card>
+                <mdui-card style="padding: 15px; width: 500px; border-radius: 30px;">
+                    <h2>Level Editor now supports themes</h2>
+                    <p>For the better experience of making levels, themes option offers designers to enhance the editor style, making it easier to interact.</p>
+                    <img src="kp-dark-mode.png" width="100%" alt="Themes" style="border-radius: 20px;">
+                </mdui-card>
+                <mdui-card style="padding: 15px; width: 500px; border-radius: 30px; height: 180px;">
+                    <h2>Testing your level in Candy Crush right in your browser</h2>
+                    <p>Live preview is just your level appearance, but testing your level in the game is the most important part of the process.</p>
+                </mdui-card>   
+            </div>
+            <br>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <mdui-card style="padding: 15px; width: 500px; border-radius: 30px; height: 150px;">
+                    <h2>Connect with friends in Community</h2>
+                    <p>Make your levels, but don't forget to share your work to the community, where you can get feedback and learn from others.</p>
+                </mdui-card>
+                <mdui-card style="padding: 15px; width: 500px; border-radius: 30px;">
+                    <h2>Save your work and get back to your level whenever you want, ...without account</h2>
+                    <p>Level Editor saves your level to your browser data, which means on every reload page your level and progress will still be there. Your level will be deleted if you clear your browser data.</p>
+                </mdui-card> 
+            </div>
+
+            <br>
+            <div style="text-align: center; display: flex; justify-content: center;"><h1>Make your editor better with</h1><h1 class="pro-text">&nbsp;PRO</h1><h1>&nbsp;plan</h1></div>
+            <p style="text-align: center;">With PRO, you can have access to use blocked features and elements. You can see the list of features that are available in PRO plan below.</p>
+            <table>
+                <tr>
+                  <th style="width: 50%; background-color: #00000000;">Features</th>
+                  <th style="background-color: #00000000;">Normal user</th>
+                  <th class="pro-content" style="border-top-left-radius: 30px;">Pro</th>
+                </tr>
+                <tr>
+                  <td style="border-top-left-radius: 30px;">Play test on browser</td>
+                  <td><div class="na"></div></td>
+                  <td class="pro-content"><div class="available"></div></td>
+                </tr>
+                <tr>
+                  <td>Save levels to the cloud even if you clear your browser data</td>
+                  <td><div class="na"></div></td>
+                  <td class="pro-content"><div class="available"></div></td>
+                </tr>
+                <tr>
+                    <td>Themes with styles&nbsp;&nbsp;<mdui-tooltip variant="rich" headline="Additional notes:" content="Normal user can change theme and color modes, PRO users can change both theme, color modes and visual styles for editor. "><mdui-icon style="user-select: none; color: #00000060;" name="info--outlined"></mdui-icon></mdui-tooltip></td>
+                    <td><div class="na"></div></td>
+                    <td class="pro-content"><div class="available"></div></td>
+                </tr>
+                <tr>
+                    <td>Get a special badge for your account</td>
+                    <td><div class="na"></div></td>
+                    <td class="pro-content"><div class="available"></div></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><div class="na" style="background: none;">Free</div></td>
+                    <td class="pro-content"><div class="available" style="background: none;">$9.99/month</div></td>
+                </tr>
+            </table>
+            <p style="text-align: center;">Get PRO plan today or sign up for free trial!</p>
+            <div class="buttons" style="text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <button class="monthly">$9.99/month<md-ripple class="month-ripple"></md-ripple></button>
+                <button class="trial">Sign up for free trial<md-ripple></md-ripple></button>
+            </div>
+            
+            <br>
+            <md-divider></md-divider>
+            <br>
+
+            <h1 style="text-align: center;">Start making your level today</h1>
+            <div class="buttons" style="text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <md-elevated-button href="index.html" style="font-family: Google Sans;">Open Level Editor</md-elevated-button>
+            </div>
+            <br>
+            <footer class="footer">
+                <div class="footer__addr">
+                  <img src="logo-horizontal.png" width="150px" alt="Level Editor">
+                    <p style="display: flex; place-items: center; gap: 15px;"><mdui-icon name="email--outlined" style="user-select: none;"></mdui-icon>contact.lvled@gmail.com</p>
+                </div>
+                
+                <ul class="footer__nav">
+                  <li class="nav__item">
+                    <h2 class="nav__title">Level Editor</h2>
+              
+                    <ul class="nav__ul">
+                      <li>
+                        <a href="#">Support</a>
+                      </li>
+                          
+                      <li>
+                        <a href="#">Pricing</a>
+                      </li>
+            
+                      <li>
+                        <a href="#">Editor</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li class="nav__item">
+                    <h2 class="nav__title">Legal</h2>
+                    
+                    <ul class="nav__ul">
+                      <li>
+                        <a href="#">Privacy Policy</a>
+                      </li>
+                      
+                      <li>
+                        <a href="#">Terms of Use</a>
+                      </li>
+            
+                      <li>
+                        <a href="#">Terms of Service</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                
+                <div class="legal">
+                  <p>&copy; 2024 candycrushgemer</p>
+                  
+                  <div class="legal__links" style="margin-right: 50px;">
+                    <span>Made with <span class="heart">♥</span> by candycrushgemer</span>
+                  </div>
+                </div>
+            </footer>
+        </mdui-layout-main>
+    </mdui-layout>
+
+    <style>
+        .social-btn {
+            background-color: #00000000;
+            border-radius: 20px;
+            border: 1px solid #00000042;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            place-items: center;
+            position: relative;
+        }
+    
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    
+    <style>
+        .footer {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 30px 30px 20px 30px;
+        color: #2f2f2f;
+        background-color: #fff;
+        border-top: 1px solid #e5e5e5;
+        width: 100%;
+        }
+    
+        .footer > * {
+        flex:  1 100%;
+        }
+    
+        .footer__addr {
+        margin-right: 1.25em;
+        margin-bottom: 2em;
+        }
+    
+        .footer__logo {
+        font-family: 'Pacifico', cursive;
+        font-weight: 400;
+        text-transform: lowercase;
+        font-size: 1.5rem;
+        }
+    
+        .footer__addr h2 {
+        margin-top: 1.3em;
+        font-size: 15px;
+        font-weight: 400;
+        }
+    
+        .nav__title {
+        font-weight: 400;
+        font-size: 15px;
+        }
+    
+        .footer address {
+        font-style: normal;
+        color: #999;
+        }
+    
+        .footer__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 36px;
+        max-width: max-content;
+        background-color: rgb(33, 33, 33, 0.07);
+        border-radius: 100px;
+        color: #2f2f2f;
+        line-height: 0;
+        margin: 0.6em 0;
+        font-size: 1rem;
+        padding: 0 1.3em;
+        }
+    
+        .footer ul {
+        list-style: none;
+        padding-left: 0;
+        }
+    
+        .footer li {
+        line-height: 2em;
+        }
+    
+        .footer a {
+        text-decoration: none;
+        }
+    
+        .footer__nav {
+        display: flex;
+        flex-flow: row wrap;
+        }
+    
+        .footer__nav > * {
+        flex: 1 50%;
+        margin-right: 1.25em;
+        }
+    
+        .nav__ul a {
+        color: #999;
+        }
+    
+        .nav__ul--extra {
+        column-count: 2;
+        column-gap: 1.25em;
+        }
+    
+        .legal {
+        display: flex;
+        flex-wrap: wrap;
+        color: #999;
+        }
+        
+        .legal__links {
+        display: flex;
+        align-items: center;
+        }
+    
+        .heart {
+        color: #2f2f2f;
+        }
+    
+        @media screen and (min-width: 24.375em) {
+        .legal .legal__links {
+            margin-left: auto;
+        }
+        }
+    
+        @media screen and (min-width: 40.375em) {
+        .footer__nav > * {
+            flex: 1;
+        }
+        
+        .nav__item--extra {
+            flex-grow: 2;
+        }
+        
+        .footer__addr {
+            flex: 1 0px;
+        }
+        
+        .footer__nav {
+            flex: 2 0px;
+        }
+        }
+    </style>
+
+    <style>
+        .top-app-bar {
+            /* From https://css.glass */
+            background: rgba(255, 198, 226, 0.25);
+            border-radius: 16px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(9.8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .pro-text {
+            background: #FF007B;
+            background: linear-gradient(to right, #FF007B 0%, #FFF200 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Style the table */
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 70%;
+            border: 1px solid #000000;
+            margin: 0 auto;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        /* Style table headers and table data */
+        th, td {
+            text-align: center;
+            padding: 16px;
+            background-color: rgb(255, 240, 254);
+            border-top-left-radius: 0px;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+        .fa-check {
+            color: green;
+        }
+
+        .fa-remove {
+            color: red;
+        }
+
+        .pro-content {
+            background: rgb(255,218,231);
+            background: linear-gradient(90deg, rgba(255,218,231,1) 11%, rgba(255,236,195,1) 75%);
+        }
+
+        .na {width: 30px; height: 30px; background-image: url(cross.svg); background-size: cover; margin: auto; /* Center the element */}
+        .available {width: 30px; height: 30px; background-image: url(tick.svg); background-size: cover; margin: auto; /* Center the element */}
+
+        .monthly {background: linear-gradient(90deg, rgba(255,0,90,1) 11%, rgba(255,174,0,1) 75%); border: none; color: #fff; font-family: Google Sans; padding: 13px; position: relative; border-radius: 30px; font-size: 15px; width: 130px; font-weight: bold;}
+        .trial {
+            font-weight: bold;
+            background: #FF007B;
+            background: linear-gradient(to right, #FF007B 0%, #FFF200 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border: 0.5px solid #919191; 
+            font-family: Google Sans; 
+            padding: 13px; 
+            position: relative; 
+            border-radius: 30px; 
+            font-size: 15px; 
+            width: 190px;
+        }
+    </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const newLevel = document.querySelector(".new-level");
+            const createBtn = document.querySelector(".create");
+            const levelNameInput = document.getElementById("levelName");
+    
+            createBtn.addEventListener("click", () => {
+                const levelName = levelNameInput.value.trim(); // Get the trimmed value of the level name
+    
+                if (levelName) {
+                    // Redirect to index.html with the levelName as a URL parameter
+                    window.location.href = `index.html?levelName=${encodeURIComponent(levelName)}`;
+                } else {
+                    // Set error attributes if the level name is empty
+                    levelNameInput.setAttribute("error", "error-text");
+                    levelNameInput.setAttribute("error-text", "Please set a level name!");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const newLevel = document.querySelector(".new-level");
+            const newLvlTemplate = document.getElementById("createEmpty");
+            const cancelBtn = document.querySelector(".cancel");
+    
+            if (newLvlTemplate) {
+                newLvlTemplate.addEventListener("click", () => {
+                    if (newLevel) {
+                        newLevel.open = true;
+                    } else {
+                        console.error("Dialog element not found.");
+                    }
+                });
+            } else {
+                console.error("Template element not found.");
+            }
+    
+            if (cancelBtn) {
+                cancelBtn.addEventListener("click", () => {
+                    if (newLevel) {
+                        newLevel.open = false;
+                    } else {
+                        console.error("Dialog element not found.");
+                    }
+                });
+            } else {
+                console.error("Cancel button element not found.");
+            }
+        });
+    </script>
+    <script>
+        const navigationDrawer = document.querySelector(".nav-drawer");
+        const openButton = document.querySelector(".open");
+        const closeButton = document.querySelector(".close");
+
+        openButton.addEventListener("click", () => {
+            navigationDrawer.open = true;
+            closeButton.style.display = 'block'; // Show close button
+            openButton.style.display = 'none'; // Hide open button
+        });
+    
+        closeButton.addEventListener("click", () => {
+            navigationDrawer.open = false;
+            openButton.style.display = 'block'; // Show open button
+            closeButton.style.display = 'none'; // Hide close button
+        });
+    </script>
+</body>
+</html>

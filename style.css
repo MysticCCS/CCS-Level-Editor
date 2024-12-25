@@ -3,12 +3,23 @@
     src: url(fonts/Roboto/Roboto-Regular.ttf);
 }
 
-p, span, label, * {
-    font-family: Roboto;
+@font-face {
+    font-family: Google Sans;
+    src: url(font/google-sans/GoogleSansText-Regular.ttf);
 }
 
-md-icon, .icon, #icon, icon {
-    font-family: Material Symbol Outlined;
+@font-face {
+    font-family: Google Sans;
+    font-weight: bold;
+    src: url(font/google-sans/GoogleSansText-Bold.ttf);
+}
+
+body, html, p, span, h1, h2, h3, h4, h5 {
+    font-family: Google Sans;
+}
+
+md-icon, .icon, #icon, [icon] {
+    font-family: 'Material Symbols Outlined';
 }
 
 table, td, tr {
@@ -105,7 +116,7 @@ td .candy_cannon {
 }
 
 .colorselected, .elementselected, .preferredselected {
-    background-color: hsla(242, 100%, 84%, 0.565) !important;
+    background-color: var(--md-sys-color-secondary-container) !important;
     border-radius: 5px;
     position: relative;
 }
@@ -203,7 +214,6 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
   }
 
 .sideoptions {
-    text-align:center;
     border: none;
     min-height: 45px;
     padding: 10px;
@@ -214,19 +224,10 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
 }
 
 .sideoptionsdream {
-    text-align:center;
-    background: repeating-linear-gradient(
-        45deg,
-        #501885,
-        #501885 10px,
-        #49157a 10px,
-        #49157a 20px
-      );
+    background: linear-gradient(279deg, rgba(135,62,230,1) 5%, rgba(74,29,117,1) 77%);
     border: none;
     min-height: 45px;
     padding: 10px;
@@ -244,6 +245,7 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
     border-bottom-color: #40136b;
     border-left-color: transparent;
     border-right-color: transparent;
+    --md-sys-color-background:#141317;--md-sys-color-on-background:#e5e1e7;--md-sys-color-surface:#141317;--md-sys-color-surface-dim:#141317;--md-sys-color-surface-bright:#3a383d;--md-sys-color-surface-container-lowest:#0e0e12;--md-sys-color-surface-container-low:#1c1b1f;--md-sys-color-surface-container:#201f24;--md-sys-color-surface-container-high:#2a292e;--md-sys-color-surface-container-highest:#353439;--md-sys-color-on-surface:#e5e1e7;--md-sys-color-surface-variant:#474550;--md-sys-color-on-surface-variant:#c9c4d1;--md-sys-color-inverse-surface:#e5e1e7;--md-sys-color-inverse-on-surface:#313034;--md-sys-color-outline:#928f9b;--md-sys-color-outline-variant:#474550;--md-sys-color-shadow:#000000;--md-sys-color-scrim:#000000;--md-sys-color-surface-tint:#c7bfff;--md-sys-color-primary:#e5dfff;--md-sys-color-on-primary:#2f2766;--md-sys-color-primary-container:#bab1fa;--md-sys-color-on-primary-container:#2b2362;--md-sys-color-inverse-primary:#5e5697;--md-sys-color-secondary:#c8c3e3;--md-sys-color-on-secondary:#302d46;--md-sys-color-secondary-container:#403c56;--md-sys-color-on-secondary-container:#d6d0f1;--md-sys-color-tertiary:#ffd9ef;--md-sys-color-on-tertiary:#521b45;--md-sys-color-tertiary-container:#eea2d4;--md-sys-color-on-tertiary-container:#4e1741;--md-sys-color-error:#ffb4ab;--md-sys-color-on-error:#690005;--md-sys-color-error-container:#93000a;--md-sys-color-on-error-container:#ffdad6;
 }
 
 .leveltypelabel {
@@ -267,7 +269,6 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     padding: 10px;
     padding-left: 5%;
     padding-right:0;
@@ -555,4 +556,81 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
     z-index: 1;
 }
 
-:root,:host{--md-sys-color-background:#fff8f8;--md-sys-color-on-background:#22191b;--md-sys-color-surface:#fff8f8;--md-sys-color-surface-dim:#e6d6d9;--md-sys-color-surface-bright:#fff8f8;--md-sys-color-surface-container-lowest:#ffffff;--md-sys-color-surface-container-low:#fff0f2;--md-sys-color-surface-container:#fbeaed;--md-sys-color-surface-container-high:#f5e4e7;--md-sys-color-surface-container-highest:#efdfe1;--md-sys-color-on-surface:#22191b;--md-sys-color-surface-variant:#f6dce2;--md-sys-color-on-surface-variant:#544247;--md-sys-color-inverse-surface:#372e30;--md-sys-color-inverse-on-surface:#feedef;--md-sys-color-outline:#867277;--md-sys-color-outline-variant:#d9c0c6;--md-sys-color-shadow:#000000;--md-sys-color-scrim:#000000;--md-sys-color-surface-tint:#994060;--md-sys-color-primary:#994060;--md-sys-color-on-primary:#ffffff;--md-sys-color-primary-container:#ffa1be;--md-sys-color-on-primary-container:#5c0f31;--md-sys-color-inverse-primary:#ffb1c7;--md-sys-color-secondary:#7e525f;--md-sys-color-on-secondary:#ffffff;--md-sys-color-secondary-container:#ffcdda;--md-sys-color-on-secondary-container:#5f3743;--md-sys-color-tertiary:#944a00;--md-sys-color-on-tertiary:#ffffff;--md-sys-color-tertiary-container:#ffa969;--md-sys-color-on-tertiary-container:#4d2400;--md-sys-color-error:#ba1a1a;--md-sys-color-on-error:#ffffff;--md-sys-color-error-container:#ffdad6;--md-sys-color-on-error-container:#410002;}
+.dreamworld-card {
+    background: linear-gradient(279deg, rgb(242, 233, 255) 5%, rgb(229, 199, 255) 77%);
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#isOwlModeEnabled {
+    --mdui-color-primary-light: rgb(96, 80, 174);
+}
+
+.quick-access-acent {
+    --md-sys-color-primary: #000000;
+    font-weight: normal;
+}
+
+.quick-access md-text-button {
+    width: 90px;
+}
+
+.menu {
+    box-shadow: 0px 6px 9px 2px rgba(0,0,0,0.19);
+    -webkit-box-shadow: 0px 6px 9px 2px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 6px 9px 2px rgba(0,0,0,0.19);
+    user-select: none;
+    border-radius: 5px;
+}
+
+body {
+    position: relative;
+}
+
+.overlay-loading {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff56;
+    backdrop-filter: blur(10px);
+}
+
+body {
+    opacity: 0; /* Start with the body hidden */
+    transition: opacity 0.5s ease-in; /* Transition effect for opacity */
+}
+
+body.fade-in {
+    opacity: 1; /* Fully visible when the class is added */
+}
+
+.example-top-app-bar {
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    background-color: #dbdbdb5d;
+    border-bottom: 1px solid #ffffffc0;
+}
+
+.uploadfiles-area {
+    width: 99%;
+    height: 200px;
+    border: 2px dashed #c8c8c8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #92929270;
+    flex-direction: column;
+    border-radius: 10px;
+    user-select: none;
+}

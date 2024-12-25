@@ -150,13 +150,16 @@ function addRequirement(isIngredient = false, ignoreLimit = false){
     
     section = document.createElement("div")
     section.classList.add("sideoptions")
+    section.style.display = "flex";
+    section.style.alignItems = "center";
+    section.style.justifyContent = "center";
     let typeText = "Order"
     section.setAttribute("reqtype", "order")
     if (isIngredient){
         typeText = "Ingredient"
         section.setAttribute("reqtype", "ingredient")
     }
-    section.innerHTML = '<button style="left: 85%; border-radius: 10px; background-color: rgb(174, 174, 174); width: 30px; height: 30px" onclick="removeRequirement(this)">X</button> <p class="DroidSans break" style="font-weight: bold; color: white; text-align: center;">Requirement:</p> <img src="ui/hud/red.png" style="max-width: 30px; max-height: 30px;"> <p class="DroidSans" style="margin: 10px; display: block; color: white; text-align: center;">' + typeText + ':</p> <select onchange="switchedRequirement(this)"> </select> <div class="break"></div> <img src="ui/btn_quit.png" style="max-width: 30px; max-height: 30px;"> <p class="DroidSans" style="margin: 10px; display: block; color: white; text-align: center;">Amount:</p> <input style="width: 50px; text-align: center;" placeholder="0" type="number">'
+    section.innerHTML = '<button style="position: relative; border-radius: 50px; border: none; background-color: #ffffff00; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;" onclick="removeRequirement(this)"><md-icon>delete</md-icon><md-focus-ring></md-focus-ring><md-ripple></md-ripple></button> <br> <br> <img src="ui/hud/red.png" style="max-width: 30px; max-height: 30px; padding-right: 5px;"><select onchange="switchedRequirement(this)"> </select> <div class="break"></div> <p  style="margin: 10px; display: block; text-align: center;">Amount:</p> <input style="margin-top: 10px;height: 20px;width: 50px; padding: 10px;" placeholder="0" type="number">'
 
     select = section.querySelector("select")
     if (!isIngredient){
@@ -198,7 +201,7 @@ function addMixerOption(){
     section = document.createElement("div")
     section.classList.add("sideoptions")
     section.setAttribute("reqtype", "mixeroption")
-    section.innerHTML = '<button style="left: 85%; border-radius: 10px; background-color: rgb(174, 174, 174); width: 30px; height: 30px" onclick="removeRequirement(this)">X</button> <div class="break"></div> <img src="ui/hud/All Blockers.png" style="max-width: 30px; max-height: 30px;"> <p class="DroidSans" style="margin: 10px; display: block; color: white; text-align: center;">Blocker:</p> <select onchange="switchedMixerOption(this)"> </select> <div class="break"></div>'
+    section.innerHTML = '<button style="position: relative; border-radius: 50px; border: none; background-color: #ffffff00; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;" onclick="removeRequirement(this)"><md-icon>delete</md-icon><md-focus-ring></md-focus-ring><md-ripple></md-ripple></button> <div class="break"></div> <img src="ui/hud/All Blockers.png" style="max-width: 30px; max-height: 30px;"> <p style="margin: 10px; display: block; text-align: center;">Blocker:</p> <select onchange="switchedMixerOption(this)" style="width: 100%;"> </select> <div class="break"></div>'
 
     select = section.querySelector("select")
 
@@ -216,18 +219,18 @@ function selectMode(){
     mode = document.querySelector('input[name="leveltype"]:checked').value
     if (mode === "Classic" || mode == "Jelly Time"){
         document.getElementById("moves-section").style.display = "none"
-        document.getElementById("time-section").style.display = "flex"
+        document.getElementById("time-section").style.display = "block"
     }
     else{
-        document.getElementById("moves-section").style.display = "flex"
+        document.getElementById("moves-section").style.display = "block"
         document.getElementById("time-section").style.display = "none"
     }
 
     document.getElementById("requirements-options-section").style.display = "none"
 
     if (mode.includes('Drop down') || mode.includes('Drop Down')) {
-        document.getElementById("requirements-options-section").style.display = "block"
-        document.getElementById("addingredient").style.display = "block"
+        document.getElementById("requirements-options-section").style.display = "flex"
+        document.getElementById("addingredient").style.display = "inherit"
     } else {
         document.getElementById("addingredient").style.display = "none"
         let requirementsContainer = document.getElementById("requirements")
@@ -239,8 +242,8 @@ function selectMode(){
     }
 
     if (mode.includes('Order')) {
-        document.getElementById("requirements-options-section").style.display = "block"
-        document.getElementById("addorder").style.display = "block"
+        document.getElementById("requirements-options-section").style.display = "flex"
+        document.getElementById("addorder").style.display = "inherit"
     } else {
         document.getElementById("addorder").style.display = "none"
         let requirementsContainer = document.getElementById("requirements")
@@ -999,8 +1002,11 @@ function importLevelUI(){
         document.getElementById("importmenu").style.display = "none"
     }
     catch(err) {
+        let importField = document.getElementById("importfield")
         let errorPara =  document.getElementById("importerror")
-        errorPara.style.display = "block"
+        // Create error attributes
+        importField.setAttribute("error", "true");
+        importField.setAttribute("error-text", "Failed to import level! Double check and try again.");
         
         // Use custom error messages
         if (err instanceof SyntaxError) {
@@ -1019,6 +1025,60 @@ const ERROR_MESSAGES = {
     IMPORT_FAILED: "Failed to import level! Double-check your code, then try again.",
     // Add more custom error messages as needed
 };
+
+// Select the upload area and file input
+const uploadArea = document.querySelector('.uploadfiles-area');
+const fileInput = document.getElementById('fileInput');
+const quickOpenbtn = document.querySelector('.openlvl');
+const bigOpenbtn = document.querySelector('.openlevelbigbtn');
+
+// Add click event listener to the upload area
+uploadArea.addEventListener('click', () => {
+    fileInput.click(); // Trigger the file input click
+});
+
+quickOpenbtn.addEventListener('click', () => {
+    fileInput.click(); // Trigger the file input click
+});
+
+bigOpenbtn.addEventListener('click', () => {
+    fileInput.click(); // Trigger the file input click
+});
+
+// Add keydown event listener for CTRL + O
+document.addEventListener('keydown', (event) => {
+    if (event.ctrlKey && event.key === 'o') { // Check if CTRL + O is pressed
+        event.preventDefault(); // Prevent the default action (like opening a new tab)
+        fileInput.click(); // Trigger the file input click
+    }
+});
+
+// Add change event listener to the file input
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0]; // Get the selected file
+
+    // Check if a file is selected and if it's a .txt file
+    if (file && file.type === 'text/plain') {
+        const reader = new FileReader(); // Create a FileReader object
+
+        // Define the onload event for the FileReader
+        reader.onload = function(e) {
+            const fileContent = e.target.result; // Get the file content
+            try {
+                const levelData = JSON.parse(fileContent); // Parse the content as JSON
+                importLevel(levelData); // Call the importLevel function with the parsed data
+                importLevelUI(); // Trigger the importLevelUI function
+            } catch (error) {
+                console.error("Error parsing file content:", error);
+                alert("Import level successfully! ^_^");
+            }
+        };
+
+        reader.readAsText(file); // Read the file as text
+    } else {
+        alert("Please select a valid .txt file."); // Alert if the file is not valid
+    }
+});
 
 function exportLevel(){
     let levelArray = []
