@@ -1,0 +1,914 @@
+<html>
+    <!-- Download stuff -->
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Level Editor Documentation</title>
+        <link rel="icon" href="logo.png">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/underscore@1.12.0/underscore-min.js"></script>
+        
+        <meta content="Web Candy Crush Level Editor" property="og:title">
+        <meta content="Guide to how to use Candy Crush Level Editor and start making your own levels" property="og:description">
+        <meta content="Candy Crush Level Editor" property="og:site_name">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+        <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <script type="importmap">
+            {
+                "imports": {
+                    "@material/web/": "https://esm.run/@material/web/"
+                }
+            }
+        </script>
+        <script type="module">
+            import '@material/web/all.js';
+            import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+            document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+        </script>
+        <script id="mduiAccent">
+            document.addEventListener('DOMContentLoaded', () => {
+                mdui.setColorScheme('#7ac8ef');
+            });
+        </script>
+        <link id="mwcaccent" rel="stylesheet" href="mat-accent-color-light.css">
+        <script type="module" src="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.4.0/index.js"></script>
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    </head>
+
+    <body style="margin: 0;">
+        <div class="overlay-loading">
+            <iframe src="mat-circular-progress.html" width="60px" height="60px" frameborder="0"></iframe>
+            <p>Loading...</p>
+        </div>
+        <script>
+            window.onload = function() {
+                document.body.classList.add('fade-in'); // Add the fade-in class
+                const loadingOverlay = document.querySelector('.overlay-loading'); // Select the loading overlay
+                
+                // Set a timeout to hide the loading overlay after 1 second
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none'; // Hide the loading overlay
+                }, 1000); // 1000 milliseconds = 1 second
+            };
+        </script>
+        <script src="script.js" defer></script>
+        <mdui-navigation-drawer modal close-on-esc close-on-overlay-click contained class="beginning-navd" style="position: fixed; overflow: hidden;">
+            <div class="content-navdrawer" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+                <md-icon-button class="close-navdrawer"><md-icon>close</md-icon></md-icon-button>
+                <h2>Welcome to Level Editor!</h2>
+                <p>Click the button below to start making levels!</p>
+                <md-list-item type="link" class="newlevelbigbtn" href="index.html" target="_blank" style="background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); border-radius: 20px; user-select: none;">
+                    <md-icon slot="start">add</md-icon>Create new level
+                </md-list-item>
+                <md-list-item type="link" class="newlevelbigbtn" style="background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-secondary-container); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 9px; border-bottom-left-radius: 9px;
+                user-select: none; margin-top: 5px;" id="ccs-codes">
+                    <md-icon slot="start">description</md-icon>Candy Crush level codes
+                </md-list-item>
+                <md-list-item type="link" class="newlevelbigbtn" style="background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-secondary-container); border-top-left-radius: 9px; border-top-right-radius: 9px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;
+                user-select: none; margin-top: 3px;" id="lvled-guid">
+                    <md-icon slot="start">description</md-icon>Level Editor guide
+                </md-list-item>
+                <div class="navd-end" style="position: absolute; bottom: 15;"> 
+                    <md-icon-button class="settings-btn"><md-icon>settings</md-icon></md-icon-button>
+                    <p style="font-size: smaller;">© Copyright 2025. Made with ❤️ by Blakiemon and other people.
+                        <a class="footer-href" href="https://discord.gg/kqq5Tx4XcM">Discord server</a> • <a class="footer-href" href="https://forms.gle/XMkahmBmzxN2HUEN9">Bug reports</a>
+                    </p>
+                </div>
+            </div>
+        </mdui-navigation-drawer>
+            <mdui-top-app-bar class="example-top-app-bar" style="width: 99%; align-items: center; position: fixed; z-index: 10; margin: 0 auto; margin-top: 10px;">
+                <md-icon-button class="opennavd">
+                    <md-icon>menu</md-icon>
+                </md-icon-button>
+                <img src="logo-horizontal.png" width="90px" draggable="false">
+                <mdui-top-app-bar-title>Documentation and Guide</mdui-top-app-bar-title>
+                <div style="flex-grow: 1;"></div>
+                
+            </mdui-top-app-bar>
+          
+            <mdui-layout-main class="example-layout-main" style="height: 97vh;">
+                <div class="content-wrapper" style="margin-top: 35px; margin-left: 25px;">
+                    <div class="code-content-wrapper">
+                        <div class="main-content" id="ccs-level-codes" style="display: none;">
+                            <a class="content-header" id="standard-codes" href="#standard-codes">Standard codes</a>
+                            <p>Behind every levels in Candy Crush Saga is a code file written in JSON language and saved in TXT format. Here's some basic and standard codes used in Candy Crush Saga:</p>
+                            <h3>Default code</h3>
+                            <div class="code-container">
+<pre><code class="code-part">{"gameModeName":"Classic moves",
+"chameleonCandyMax":0,"chameleonCandySpawn":0,
+"fallingIcingMax":0,"fallingIcingSpawn":0,"fallingIcingLevel":0, 
+"licoriceMax":0,"licoriceSpawn":0,
+"luckyCandyMax":0,"luckyCandySpawn":0,
+"mulockCandyMax":0,"mulockCandySpawn":0,
+"mysteryCandyMax":0,"mysteryCandySpawn":0,
+"pepperCandyExplosionTurns":0,"pepperCandyMax":0,"pepperCandySpawn":0,
+"stripedCandyMax":0,"stripedCandySpawn":0,
+"stripedRowCandyMax":0,"stripedRowCandySpawn":0,
+"stripedColumnCandyMax":0,"stripedColumnCandySpawn":0,
+"timeCandyMax":0,"timeCandySpawn":0,
+"wrappedCandyMax":0,"wrappedCandySpawn":0,
+"colorBombMax":0,"colorBombSpawn":0,
+"fishMax":0,"fishSpawn":0,
+"shieldMax":0,"shieldSpawn":0,"shieldLevel":0,
+"moveLimit":20,
+"numberOfColours":5,
+"disablePreLevelBoosters":false,
+"colorWeightAdjustments":[0],
+"frogStomachSize":0,
+"scoreTargets":[100,200,300],
+"portals":[],
+"gates":[],
+"candyCobras":[],
+"wonderfulWrappers":[],
+"orlocks":[],
+"skulls":[],
+"episodeId":0,
+"levelId":0,
+"protocolVersion":"0.3",
+"randomSeed":0,
+"tileMap":[
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"]
+]}
+</code>
+</pre>
+                            </div>
+                            <h3>Moves level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container"><pre><code class="code-part">"gameModeName": "Classic moves",</code></pre>
+                            </div>
+                            <h3>Jelly level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container"><pre><code class="code-part">"gameModeName": "Light up",</code></pre>
+                            </div>
+                            <h3>Ingredients level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Drop down",
+"ingredients":[1,1],
+"numIngredientsOnScreen":1,
+"ingredientSpawnDensity":0,
+"maxNumIngredientsOnScreen":1,
+</code></pre>
+                            </div>
+                            <h3>Order level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Order",
+"_itemsToOrder":[{"item":1,"quantity":10},{"item":2,"quantity":10},{"item":3,"quantity":10}],
+</code></pre>
+                            </div>
+                            <h3>Mixed (Jelly Ingredients) level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Jelly Drop Down",
+"ingredients":[1,1],
+"numIngredientsOnScreen":1,
+"ingredientSpawnDensity":0,
+"maxNumIngredientsOnScreen":1,
+</code></pre>
+                            </div>
+                            <h3>Mixed (Jelly Order) level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Jelly Order",
+"_itemsToOrder":[{"item":1,"quantity":10},{"item":2,"quantity":10}],
+</code></pre>
+                            </div>
+                            <h3>Mixed (Order Ingredients) level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Order Drop Down",
+"_itemsToOrder":[{"item":1,"quantity":10},{"item":2,"quantity":10}],
+"ingredients":[1,1],
+"numIngredientsOnScreen":1,
+"ingredientSpawnDensity":0,
+"maxNumIngredientsOnScreen":1,
+</code></pre>
+                            </div>
+                            <h3>Rainbow Rapids level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Rainbow Rapids",
+"rainbowRapidsTargets":1,
+</code></pre>
+                            </div>
+                            <h3>Mixed (Rainbow Rapids Jelly) level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Rainbow Rapids Jelly",
+"rainbowRapidsTargets":1,
+</code></pre>
+                            </div>
+                            <h3>Mixed (Rainbow Rapids Jelly) level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Rainbow Rapids Drop Down",
+"rainbowRapidsTargets":1,
+"ingredients":[1,1],
+"numIngredientsOnScreen":1,
+"ingredientSpawnDensity":0,
+"maxNumIngredientsOnScreen":1,
+</code></pre>
+                            </div>
+                            <h3>Mixed (Rainbow Rapids Jelly) level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Rainbow Rapids Order",
+"rainbowRapidsTargets":1,
+"_itemsToOrder":[{"item":1,"quantity":10},{"item":2,"quantity":10}],
+</code></pre>
+                            </div>
+                            <h3>Timed level</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Classic",
+"timeLimit": 60,
+</code></pre>
+                            </div>
+                            <h3>Mixed (Jelly Time) level (Broken)</h3>
+                            <p>Add or replace code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"gameModeName": "Jelly Time",
+"timeLimit": 60,
+</code></pre>
+                            </div>
+                            <h3>Evil Spawner</h3>
+                            <p>Add code with:</p>
+                                <div class="code-container">
+<pre><code class="code-part">"evilSpawnerAmount":1,
+"evilSpawnerElements":[0],
+"evilSpawnerCount":0,
+</code></pre>
+                            </div>
+                            <h3>Custom Colour</h3>
+                            <p>Add code with: 0 (blue), 1 (green), 2 (orange), 3 (purple), 4 (red), 5 (yellow)</p>
+                                <div class="code-container"><pre><code class="code-part">"preferredColors":[0,1,2,3,4,5],</code></pre>
+                            </div>
+                            <h3>Custom Score of each matching</h3>
+                            <p>Add code with:</p>
+                                <div class="code-container"><pre><code class="code-part">"custom_score_match":60,</code></pre>
+                            </div>
+                            <h3> "Level Types" (Candy Spawning RNG)</h2>
+                            <p>
+                                <pre style="font-family: Google Sans; line-height: 29px;">Used by level designers of King to modify candy spawning patterns depending on the style of level, for balancing.
+<strong>Excavation</strong>: A board where you remove blockers in a simple, traditional manner.
+<strong>Sniping</strong>: A board with elements that you can only access with special candies.
+<strong>Puzzle</strong>: A complex board that usually involves very specific strategies to pass. Can also be used on the opppsite spectrum as a simple level with little to no blockers.
+<strong>Endurance</strong>: A board that involves blockers that spread or return from cannons (toffee, chocolate, etc)
+<strong>Limited Play Space</strong>: A board that starts off with very few open spaces, as a result of many sugar coats or other blockers. Can also be used for a level with only a few spaces.
+<strong>Explosive</strong>: A level with low colors, or alternatively, a level with a lot of special candy spawns or chain reactions.
+Add this code to add a spawning pattern (add or remove depending on the level styles that fit your level):</pre>
+                            </p>
+                                <div class="code-container"><pre><code class="code-part">"levelType":["Excavation","Sniping","Puzzle","Endurance","LimitedPlaySpace","Explosive"],</code></pre></div>
+                            <a class="content-header" id="tilemap-codes" href="#tilemap-codes">Tile map codes</a>
+                            <a class="h3-header-href" id="tilemap-how-it-works" href="#tilemap-how-it-works">How it works</a>
+                            <p>Candy Crush is a 9x9 board game; therefore, every level is mapped in a 9x9 tile as well:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"tileMap":[
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"],
+["000","000","000","000","000","000","000","000","000"]
+]
+</code></pre></div>
+                            <p>Quite apparently, every "000" represents a tile, and every row is coded in a line (so there are 9 lines), in which every 3-character number constitutes an element. Here are some basic examples and notes:
+                                    <ul>
+                                        <li>"000" represents the empty space; "001" represents the empty tile, "002" represents a random-coloured candy; "044" represents a colour bomb.</li>
+                                        <li>The elements can also be stacked on the code, such that "002009" represents a random-coloured candy inside the chocolate; while "042044" represents a colour bomb inscribed a 5-layered lock.</li>
+                                        <li>Some blockers are not supposed to have anything such as candies/colour bombs inside the blocker, like icings. To ensure no candies are inside the blocker, a "006" is used to prevent bugs from happening. For example, "006023" represents a 5-layered icing, "006024" represents a chocolate spawner.</li>
+                                        <li>Candies spawn-point somehow should be available. Of course, it is not necessary if you want to make a level like clearing the whole board without candies left (which King removed this kind of gameplay by redesigning that only level). Examples:
+                                            <ul>
+                                                <li>"005" represents a spawn point in which every element, such as liquorice swirl, ingredients, and candies mentioned above on the code, is spawned (because it is not specified further, that will be an empty tile).</li>
+                                                <li>If you don't want everything to spawn at one single point, you need to specify what to spawn on that tile. For example, "002005026" means a random-coloured candy is included in the tile while a random-coloured candy spawn point is above it; "002005026027028" means a random-coloured candy is included in the tile while a random-coloured candy, ingredients and liquorice swirl are spawned at that point.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Remember:</strong>
+                                            <ul>
+                                                <li>By the game mechanics, blockers (of course, movable blockers) have the highest priority on spawning, then ingredients, and the last are candies. Therefore, if you set 20 liquorice swirls to be spawned every move, it is impossible for ingredients to be spawned at the whole game if you set them to be spawned at the same point.</li>
+                                                <li>It is possible to have an unmovable blocker and a spawn point exist together. For example, "005006023028" means the tile includes a 5-layered icing with an ingredient cannon above it. Therefore, don't make silly mistakes (unless you want to troll) such as "004005006024027" (ingredient cannon with a chocolate spawner and a double jelly underneath); no ingredients can be spawned at that point, and that jelly obviously cannot be cleared.</li>
+                                                <li><strong>"00205" (instead of "002005")</strong> will make the game <b>crash</b> because it does not follow the 3-character number rule.</li>
+                                                <li><b>"002005 (instead of "002005")</b> will also make the game <b>crash</b> because a close quotation mark is missing.</li>
+                                            </ul>
+                                        </li>
+                                        <li>You may try out different combinations with creativity!</li>
+                                    </ul>
+                                </p>
+                            <a class="h3-header-href" id="tilemap-codes" href="#tilemap-codes">Codes</a>
+                            <p>Candy Crush has released (and removed) many elements in the past decade. Since the code is not designed for users to edit, the years of development made the elements' code messy and unorganised. Here is a list of the elements corresponding to their code number:</p>
+                            <img src="elements-table.png" width="100%">
+                            <a class="h3-header-href" id="tilemap-miscellaneous-info" href="#tilemap-miscellaneous-info">Miscellaneous info</a>
+                            <ol style="line-height: 29px; display: flex; justify-content: space-between; gap: 55px;">
+                                <div style="width: 100%;">
+                                    <li>This level type will appear up to v1.200</li>
+                                    <li>This level type will appear up to v1.173.0.2</li>
+                                    <li>This is a spawn point with <strong>ALL</strong> elements mentioned in code sheet. Please use with candy cannon code if you want to specialize the elements spawn.</li>
+                                    <li>Example of unmovable blocker: Icings, chocolate spawner, popcorn, evil spawner, etc. Doesn't include Marmalade and Liquorice Lock, those have candies in the blockers.</li>
+                                    <li>This element will appear up to v.1.200.0.2</li>
+                                    <li>This element will appear up to v.1.200.0.2</li>
+                                    <li>This element will appear up to v.1.200.0.2</li>
+                                    <li>This element will appear up to v.1.123.0.4</li>
+                                </div>
+                                <div style="width: 100%;">
+                                    <li>Extra Moves Candy will appear up to v1.183.0.3</li>
+                                    <li>This element will appear up to v1.173.0.2</li>
+                                    <li>This element will appear up to v.1.200.0.2</li>
+                                    <li>Extra Moves Candy Cannon will appear up to v1.183.0.3</li>
+                                    <li>This element will appear up to v.1.154.0.5</li>
+                                    <li>This code cannot be used with 151.</li>
+                                    <li>This code cannot be used with 150.</li>
+                                    <li>This code can be used with 018 and 029.</li>
+                                </div>
+                            </ol>
+                            <a class="content-header" id="grid" href="#grid">Grid</a>
+                            <p>Before the talk about teleporters, conveyor belts and order locks, let's take a look of the grid paper of the board:</p>
+                            <img src="GridDIY.webp" width="700px" title="Gird paper of the board.">
+                            <a class="content-header" id="teleporter" href="#teleporter">Teleporter</a>
+                            <p>Teleporters, teleport the things from there to there. Remember, <strong>14</strong> is very important for teleporters' codes, it can hide, or show the elements in the board. Here is the use of teleporters:
+                            </p>
+                            
+                            <br>
+                            <div class="compare-cards" style="display: flex; gap: 10px;">
+                                <mdui-card style="padding: 10px; border-radius: 20px; display: flex; flex-direction: column; width: 100%;">
+                                    <img src="example-teleporter-1.webp" style="margin: 0 auto;" alt="">
+                                    <p>Without 14 in the code</p>
+                                    <div class="code-container"><pre><code class="code-part">"portals":[[[3,4],[7,1]],[[8,3],[7,5]]],</code></pre></div>
+                                </mdui-card>
+                                <mdui-card style="padding: 10px; border-radius: 20px; display: flex; flex-direction: column; width: 100%;">
+                                    <img src="example-teleporter-2.webp" style="margin: 0 auto;" alt="">
+                                    <p>With 14 in the code</p>
+                                    <div class="code-container"><pre><code class="code-part">"portals":[[[3,4,14],[7,1,14]],[[8,3,14],[7,5,14]]],</code></pre></div>
+                                </mdui-card>
+                            </div>
+                            <a class="content-header" id="conveyor-belts" href="#conveyor-belts">Conveyor Belts</a>
+                            <p>Using Conveyor belts's code may be complicated, but not difficult, it will be the hardest part of code, handle it well proved that you have a great progress of learning the codes :&#41;
+                            </p>
+                            <div class="mdc-data-table">
+                                <div class="mdc-data-table__table-container">
+                                  <table class="mdc-data-table__table" aria-label="Conveyor Belts">
+                                    <thead>
+                                      <tr class="mdc-data-table__header-row">
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">No.</th>
+                                        <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Direction</th>
+                                        <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Portal Colour</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Icon</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody class="mdc-data-table__content">
+                                      <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell" scope="row">0</th>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Up</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">N/A</td>
+                                        <td class="mdc-data-table__cell">/</td>
+                                      </tr>
+                                      <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell" scope="row">1</th>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Right</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Purple</td>
+                                        <td class="mdc-data-table__cell">
+                                            <img src="guide-assets/Conveyor_portal_red.webp" alt="">
+                                        </td>
+                                      </tr>
+                                      <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell" scope="row">2</th>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Down</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Blue</td>
+                                        <td class="mdc-data-table__cell">
+                                            <img src="guide-assets/Conveyor_portal_blue.webp" alt="">
+                                        </td>
+                                      </tr>
+                                      <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell" scope="row">3</th>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Left</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell">Green</td>
+                                        <td class="mdc-data-table__cell">
+                                            <img src="guide-assets/Conveyor_portal_green.webp" alt="">
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                            </div>
+                            <p>Code:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"gates":[[[Conveyor Belt Coordinate],[Next Conveyor Belt Location],[Direction],[Portal Colour]]], (if any)
+"gates":[] (if none)
+</code></pre>
+                            </div><br>
+                            <div class="code-container"><pre><code class="code-part">Seem so complicated? Try more times!</code></pre></div>
+                            <p>For example:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"gates":[[[8,5],[7,5],[3],[2]],[[7,5],[6,5],[3],[0]],
+         [[6,5],[6,4],[0],[0]],[[6,4],[6,3],[0],[0]],
+         [[6,3],[7,3],[1],[0]],[[7,3],[8,3],[1],[0]],
+         [[8,3],[8,5],[1],[2]]],
+</code></pre>
+                            </div>
+                            <p>Result:</p>
+                            <img src="guide-assets/conveyor_belts_example_result.webp" title="Result">
+                            <a class="content-header" id="order-locks" href="#order-locks">Order Locks</a>
+                            <p>Using order locks' code may be complicated, but not difficult.
+                            </p>
+                            <p>Code:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"orlocks":[[Tile number, Length of horizontal lock, Length of vertical lock, Order target, Order amount]], (if any)
+"orlock":[] (if none)
+</code></pre>
+                            </div>
+                            <p>For example:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"orlocks":[[0,0,1,9,1,10],[1,4,6,1,9,30],[5,5,4,4,34,5]],
+</code></pre>
+                            </div>
+                            <p>Result:</p>
+                            <img src="guide-assets/order-locks-example.webp" title="OrLockResult">
+                            <a class="content-header" id="sour-skulls" href="#sour-skulls">Sour Skulls</a>
+                            <p>Using Sour Skulls's code may be complicated but not difficult.
+                            </p>
+                            <p>Code:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"skulls":[[tile number,tile number,(1, 2, 3...),false/true,false/true]], (if any)
+"skulls":[], (if none)
+</code></pre>
+                            </div>
+                            <p>
+                                1, 2, 3,...: Sour Skull appear sequence.
+                                <br>
+                                First false/true: No starting point/starting point for the skull to appear on this pedestal.
+                                <br>
+                                Second false/true: The skull will/ will not appear on this pedestal.
+                            </p>
+                            <a class="content-header" id="candy-cobra" href="#candy-cobra">Candy Cobra</a>
+                            <p>Using Candy Cobra's code may be complicated but not difficult.
+                            </p>
+                            <p>Code:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"candyCobras":[[From tile number, Candy Cobra layer, To tile number]], (if any)
+"candyCobras":[], (if none)
+</code></pre>
+                            </div>
+                            <a class="content-header" id="wonderful-wrapper" href="#wonderful-wrapper">Wonderful Wrapper</a>
+                            <p>Possibly the longest code ever!
+                            </p>
+                            <p>Code:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"wonderfulWrappers":[[From tile number, Orientation, Colour of 1st ribbon, Colour of 2nd ribbon, Colour of 3rd ribbon, Colour of 4th ribbon, Colour of 5th ribbon, 
+1st element contained, 2nd element contained, Colour of 1st element, Colour of 2nd element]], (if any)
+"wonderfulWrappers":[], (if none)
+</code></pre>
+                            </div>
+                            <ul>
+                                <li>Orientation: 1 is vertical, 2 is horizontal.</li>
+                                <li>Ribbon colours: -1 is no ribbon, 0 is blue, 1 is green, 2 is orange, 3 is purple, 4 is red, 5 is yellow.</li>
+                                <li>Element colours: -1 is random coloured, 0 is blue, 1 is green, 2 is orange, 3 is purple, 4 is red, 5 is yellow.</li>
+                                <li>Wonderful Wrapper elements contained: 44 is colour bomb, 45 is horizontal striped candy, 46 is vertical striped candy, 47 is wrapped candy, 49 is jelly fish.</li>
+                            </ul>
+                            <p>Example:</p>
+                            <div class="code-container">
+<pre><code class="code-part">"wonderfulWrappers":[[1,8,2,0,1,2,3,4,44,49,3,2],[2,0,1,3,3,-1,-1,3,49,47,5,3]],
+</code></pre>
+                            </div>
+                            <p>Result:</p>
+                            <img src="guide-assets/Image_wonderfulwrapperexample.webp" title="Wonderful Wrapper Result">
+                            <a class="content-header" id="candy-order-codes" href="#candy-order-codes">Candy Order Codes</a>
+                            <div class="code-container">
+<pre><code class="code-part">"_itemsToOrder":[{"item":1,"quantity":10},{"item":2,"quantity":10},{"item":3,"quantity":10}],
+</code></pre>
+                            </div>
+                            <p>These codes can also be used for Order Locks' codes. You have an example above. Consider check out the list in the editor.
+                            </p>
+                            <a class="content-header" id="magic-mixer" href="#magic-mixer">Magic Mixer</a>
+                            <p>Magic mixer is evil, but its codes are not evil.
+                            </p>
+                            <div class="code-container">
+<pre><code class="code-part">"evilSpawnerAmount":8,
+"evilSpawnerElements":[10],
+"evilSpawnerInterval":3,
+</code></pre>
+                            </div>
+                            <p>Notes:</p>
+                            <ul>
+                                <li>Amount = How many of that blocker</li>
+                                <li>Element = Element number</li>
+                                <li>Interval = How many moves in between</li>
+                            </ul>
+                            <p>Consider check out the list in the editor.</p>
+                        </div>
+                        <div class="table-of-content" id="ccs-level-codes-tbc" placement="right" style="display: none;">
+                            <div style="margin-left: 10px;">
+                                <p style="font-size: smaller;">On this page</p>
+                                <h2>CCS Codes</h2>
+                                <ul style="padding: 0; font-size: 14px; line-height: 14px;">
+                                    <li style="list-style-type: none;">
+                                        <a class="table-contents-a" href="#standard-codes">Level Codes</a>
+                                        <ul style="margin-top: 12px; line-height: 14px;">
+                                            <li><a class="table-contents-a" href="#standard-codes">Standard codes</a></li>
+                                        </ul>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#tilemap-codes">Tile map codes</a>
+                                        <ul style="margin-top: 12px; line-height: 14px;">
+                                            <li><a class="table-contents-a" href="#tilemap-how-it-works">How it works</a></li>
+                                            <li style="margin-top: 12px;"><a class="table-contents-a" href="#tilemap-codes">Codes</a></li>
+                                            <li style="margin-top: 12px;"><a class="table-contents-a" href="#tilemap-miscellaneous-info">Miscellaneous info</a></li>
+                                        </ul>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#grid">Grid</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#teleporters">Teleporters</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#conveyor-belts">Conveyor Belts</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#order-locks">Order Locks</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#candy-cobra">Candy Cobra</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#wonderful-wrapper">Wonderful Wrapper</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#candy-order-codes">Candy Order Codes</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#magic-mixer">Magic Mixer</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="main-content" id="level-editor-guide">
+                            <p>Welcome to the Level Editor! This guide will help you get started with creating your own Candy Crush Saga levels.</p>
+                            <a id="overview" href="#overview" class="content-header">Overview</a>
+                            <p>Here's a brief overview of the Level Editor:</p>
+                            <img src="guide-assets/get-started-1.png" width="100%" alt="">
+                            <img src="guide-assets/get-started-2.png" width="100%" alt="">
+                            <img src="guide-assets/get-started-3.png" width="100%" alt="">
+                            <img src="guide-assets/get-started-4.png" width="100%" alt="">
+                            <a id="how-to-use" href="#how-to-use" class="content-header">How to use: Step-by-step</a>
+                            <p>If you are a beginner in using Level Editor, check out these guides for making your first complete level.</p>
+                            <ol style="line-height: 29px;">
+                                <li>First, make a design for your level. Your level can be simple moves level, jelly level, ingredients level,... You can refer to some levels by <a href="https://youtube.com/@candycrushgemer" style="color: var(--md-sys-color-primary); text-decoration: none;">candycrushgemer</a> for making an idea for your level.</li>
+                                <li>Now, let's get started. Open <a href="index.html" style="color: var(--md-sys-color-primary); text-decoration: none;">Level Editor</a>, now you are in the main editor. 
+                                    <br>
+                                    Starting with making your level, for example, if you want to place a red candy, first choose color <img src="elements/red.png" width="20px"> in the <strong>Color</strong> dropdown menu, then make sure you have element <img src="elements/random.png" width="20px"> selected in the <strong>Candy</strong> menu. Now, click on the grid to place the candy and you are done!
+                                    <img src="guide-assets/guide-place-elements.svg" width="100%">
+                                    <strong>Notes:</strong>
+                                    <ul>
+                                        <li><strong>Mixers, Candy Cannon</strong> are elements that needed their own properties. You can change them in the Configuration side option.</li>
+                                        <li>You shouldn't add to many special candies otherwise the game will be unplayable due to the game mechanics.</li>
+                                        <li><strong>Candy Cobra notes:</strong> if you don't make a level with Candy Cobra inside, when exporting you should delete the code line <code>"candyCobras":3</code> at the end of the code. If you make a level with Candy Cobra inside, then remember to change </li>
+                                    </ul>
+                                </li>
+                                <li><strong>Export your level:</strong> Click on <b>File > Export level</b> or you can use <kbd>Ctrl + S</kbd> keyboard shortcut to export your level. You can save your level to your device or share it to anywhere. Note if you want the link shorter please use the link shortener online cuz this editor is not supported short links yet. </li>
+                                <li>The next time you want to load your levels, please go to <strong>File > Open</strong> or use <kbd>Ctrl + O</kbd> keyboard shortcut to open files. You can also load levels using <strong>File > Import level</strong> or <kbd>Ctrl + I</kbd>. You can select your level or type in your level code. </li>
+                            </ol>
+                            
+                            <a id="contacts" href="#contacts" class="content-header">Contacts</a>
+                            <p>If you have any problems while using tool, please send bugs so we can fix the tool as soon as possible, making the tool more usable and better for you.</p>
+                            <div class="body">
+                                <md-list style="--md-list-container-color: var(--md-sys-color-error-container); --md-list-item-label-text-color: var(--md-sys-color-error); border-radius: 20px;"><md-list-item type="text" md-list-item="" tabindex="0">
+                                    <md-icon slot="start" style="color: var(--md-sys-color-error);" aria-hidden="true">release_alert</md-icon>All right go to King Limited. If they so chose this editor may be taken down at any time.
+                                </md-list-item></md-list>
+                                <p>Don't forget these cool guys who worked hard to make this editor!</p>
+                                <md-list style="border-radius: 20px; --md-list-container-color: var(--md-sys-color-surface-container);">
+                                    <md-list-item type="text" md-list-item="" tabindex="-1">
+                                        <mdui-avatar src="avatar-generic.png" slot="start"></mdui-avatar>Blakiemon
+                                        <div slot="supporting-text">The first person to create this tool</div>
+                                    </md-list-item>
+                                    <md-divider inset=""></md-divider>
+                                    <md-list-item type="text" md-list-item="" tabindex="-1">
+                                        <mdui-avatar src="avatar-generic.png" slot="start"></mdui-avatar>Fence
+                                        <div slot="supporting-text">Helper</div>
+                                    </md-list-item>
+                                    <md-divider inset=""></md-divider>
+                                    <md-list-item type="text" md-list-item="" tabindex="-1">
+                                        <mdui-avatar src="avatar-generic.png" slot="start"></mdui-avatar>Candy Crush Gemer
+                                        <div slot="supporting-text">Redesigning and remaking the tool</div>
+                                    </md-list-item>
+                                    <md-divider inset=""></md-divider>
+                                    <md-list-item type="link" href="https://discord.gg/kqq5Tx4XcM" target="_blank" md-list-item="" tabindex="0">
+                                        <img src="discord.svg" slot="start" width="24px" alt="" style="filter: invert(0);">Join Discord for supports and discussions! <md-icon slot="end" aria-hidden="true">open_in_new</md-icon>
+                                    </md-list-item>
+                                    <md-divider inset></md-divider>
+                                    <md-list-item type="link" href="https://forms.gle/XMkahmBmzxN2HUEN9" target="_blank" md-list-item="" tabindex="0">
+                                        <md-icon slot="start">bug_report</md-icon> Please send bugs here <md-icon slot="end" aria-hidden="true">open_in_new</md-icon>
+                                    </md-list-item>
+                                    <md-divider inset></md-divider>
+                                    <md-list-item type="link" href="mailto:contact.ccgccs@gmail.com" target="_blank" md-list-item="" tabindex="0">
+                                        <md-icon slot="start">email</md-icon> Contact via email <md-icon slot="end" aria-hidden="true">open_in_new</md-icon>
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                        </div>
+                        <div class="table-of-content" id="level-editor-guide-tbc" placement="right">
+                            <div style="margin-left: 10px;">
+                                <p style="font-size: smaller;">On this page</p>
+                                <h2>Level Editor Guide</h2>
+                                <ul style="padding: 0; font-size: 14px; line-height: 14px;">
+                                    <li style="list-style-type: none;">
+                                        <a class="table-contents-a" href="#overview">Overview</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#how-to-use">How to use: Step-by-step</a>
+                                    </li>
+                                    <li style="list-style-type: none; margin-top: 12px;">
+                                        <a class="table-contents-a" href="#contacts">Contacts</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <forge-dialog class="settings-fulldialog" style="--forge-dialog-shape: 30px; --forge-dialog-background: var(--md-sys-color-surface-container-high);">
+                    <forge-scaffold style="margin: 0; width: 700px; height: 700px;">
+                        <mdui-layout slot="body">
+                            <mdui-top-app-bar variant="elevated" scrolling scroll-behavior="elevate" scroll-target=".example-scroll-behavior-elevate">
+                                <md-icon-button class="close-settings">
+                                    <md-icon>close</md-icon>
+                                </md-icon-button>
+                                <mdui-top-app-bar-title><strong>Settings</strong></mdui-top-app-bar-title>
+                                <div style="flex-grow: 1"></div>
+                            </mdui-top-app-bar>
+                            <mdui-layout-main>
+                                <md-list>
+                                    <md-list-item>
+                                        Enable dark mode
+                                        <forge-switch id="switchDark" icon="none" slot="end" style="--forge-switch-track-on-color: var(--md-sys-color-inverse-primary); --forge-switch-handle-on-color: var(--md-sys-color-primary);"></forge-switch>
+                                    </md-list-item>
+                                    <md-divider></md-divider>
+                                    <mdui-collapse>
+                                        <mdui-collapse-item>
+                                            <md-list-item slot="header" type="link">Themes <md-icon slot="end">keyboard_arrow_down</md-icon></md-list-item>
+                                            <div style="margin-left: 15px; padding: 10px; overflow: hidden;">
+                                                <mdui-radio-group id="themesRadios" value="default">
+                                                    <mdui-radio value="default">Default</mdui-radio><br>
+                                                    <mdui-radio disabled value="lipstick">Lipstick color</mdui-radio><br>
+                                                    <mdui-radio disabled value="green">Green</mdui-radio><br>
+                                                    <mdui-radio disabled value="purple">Purple</mdui-radio>
+                                                </mdui-radio-group>
+                                            </div>
+                                        </mdui-collapse-item>
+                                    </mdui-collapse>
+                                    <md-divider></md-divider>
+                                    <md-list-item type="link">
+                                        Bug report
+                                        <md-icon slot="end">open_in_new</md-icon>
+                                    </md-list-item>
+                                    <md-divider></md-divider>
+                                    <md-list-item>
+                                        <md-icon slot="start">info</md-icon>
+                                        Version 1.7.1
+                                        <forge-button id="checkUpdates" slot="end" style="--forge-button-background: var(--md-sys-color-primary); --forge-button-color: var(--md-sys-color-on-primary);">Check for updates</forge-button>
+                                        <forge-button slot="end" style=" --forge-button-color: var(--md-sys-color-primary);">View changelogs</forge-button>
+                                    </md-list-item>
+                                </md-list>
+                                <mdui-snackbar closeable class="updates-notify">You're using the latest version of Level Editor!</mdui-snackbar>
+                            </mdui-layout-main>
+                        </mdui-layout>
+                    </forge-scaffold>
+                </forge-dialog>
+            </mdui-layout-main>
+
+            <script>
+                const beginningNavd = document.querySelector(".beginning-navd");
+                const menuBtn = document.querySelector(".opennavd");
+                const closeBtn = document.querySelector(".close-navdrawer");
+              
+                menuBtn.addEventListener("click", () => beginningNavd.open = true);
+                closeBtn.addEventListener("click", () => beginningNavd.open = false);
+            </script>
+
+        <script>
+            // Function to check the dark mode switch and apply changes
+            function checkDarkMode() {
+                // Get the switch element
+                const darkModeSwitch = document.getElementById('switchDark');
+
+                // Check if the switch is checked
+                if (darkModeSwitch.selected) {
+                    // Add the dark theme class to the HTML element
+                    document.documentElement.classList.add('mdui-theme-dark');
+
+                    // Change the src of the mwcaccent link
+                    const mwcAccentLink = document.getElementById('mwcaccent');
+                    mwcAccentLink.setAttribute('href', 'mat-accent-color-dark.css');
+                } else {
+                    // Remove the dark theme class if not checked
+                    document.documentElement.classList.remove('mdui-theme-dark');
+
+                    // Change the src back to light accent color
+                    const mwcAccentLink = document.getElementById('mwcaccent');
+                    mwcAccentLink.setAttribute('href', 'mat-accent-color-light.css');
+                }
+            }
+
+            // Add an event listener to the switch to check for changes
+            document.getElementById('switchDark').addEventListener('change', checkDarkMode);
+
+            // Initial check on page load
+            document.addEventListener('DOMContentLoaded', checkDarkMode);
+        </script>
+
+        <script>
+            const updateSnackbar = document.querySelector(".updates-notify");
+            const checkUpdates = document.getElementById("checkUpdates");
+
+            checkUpdates.addEventListener("click", () => updateSnackbar.open = true);
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const settingsBtn = document.querySelector('.settings-btn');
+                const settingsFulldialog = document.querySelector('.settings-fulldialog');
+                const closeSettings = document.querySelector('.close-settings');
+
+                // Add event listener to settings button
+                settingsBtn.addEventListener('click', function () {
+                    settingsFulldialog.setAttribute('open', '');
+                });
+
+                // Add event listener to close settings button
+                closeSettings.addEventListener('click', function () {
+                    settingsFulldialog.removeAttribute('open');
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            // Get the elements
+            const ccsCodes = document.getElementById('ccs-codes');
+            const lvledGuid = document.getElementById('lvled-guid');
+            const levelEditorGuide = document.getElementById('level-editor-guide');
+            const levelEditorGuideTbc = document.getElementById('level-editor-guide-tbc');
+            const ccsLevelCodes = document.getElementById('ccs-level-codes');
+            const ccsLevelCodesTbc = document.getElementById('ccs-level-codes-tbc');
+
+            // Function to handle #ccs-codes click
+            ccsCodes.addEventListener('click', function() {
+                // Set display to none for level editor guides
+                levelEditorGuide.style.display = 'none';
+                levelEditorGuideTbc.style.display = 'none';
+                
+                // Remove style attribute for ccs level codes
+                ccsLevelCodes.removeAttribute('style');
+                ccsLevelCodesTbc.removeAttribute('style');
+            });
+
+            // Function to handle #lvled-guid click
+            lvledGuid.addEventListener('click', function() {
+                // Remove style attribute for level editor guides
+                levelEditorGuide.removeAttribute('style');
+                levelEditorGuideTbc.removeAttribute('style');
+                
+                // Set display to none for ccs level codes
+                ccsLevelCodes.style.display = 'none';
+                ccsLevelCodesTbc.style.display = 'none';
+            });
+        });
+        </script>
+
+        <style>
+            .mdc-data-table__table, table {
+                border: 0.5px solid var(--md-sys-color-outline-variant);
+            }
+
+            .mdc-data-table__header-row, th {
+                background-color: var(--md-sys-color-surface-container) !important;
+                color: var(--md-sys-color-on-surface) !important;
+            }
+
+            .mdc-data-table__cell, .mdc-data-table__content, td, tr {
+                background-color: var(--md-sys-color-surface) !important;
+                color: var(--md-sys-color-on-surface) !important;
+                border-radius: 0px;
+                
+            }
+
+
+            .beginning-navd::part(panel) {
+                height: 95%;
+                border-radius: 30px;
+                padding: 15px;
+                margin: auto 0;
+                margin-left: 10px;
+            }
+
+            .table-of-content {
+                width: 300px;
+                margin-right: 20px;
+                padding: 10px;
+                border-radius: 20px;
+                background-color: var(--md-sys-color-surface);
+            }
+
+            body {
+                background-color: var(--md-sys-color-surface-container);
+            }
+
+            .table-contents-a {
+                color: var(--md-sys-color-primary);
+                text-decoration: none;
+            }
+
+            .main-content {
+                background-color: var(--md-sys-color-surface);
+                border-radius: 30px;
+                padding: 15px;
+                width: 100%;
+                margin-right: 12px;
+                overflow: scroll;
+                overflow-x: hidden;
+            }
+
+            .content-header {
+                display: block;
+                font-size: 1.5em;
+                margin-block-start: 0.83em;
+                margin-block-end: 0.83em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+                font-weight: bold;
+                unicode-bidi: isolate;
+                text-decoration: none;
+                color: #000000;
+            }
+
+            .h3-header-href {
+                display: block;
+                font-size: 1.17em;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+                font-weight: bold;
+                unicode-bidi: isolate;
+                text-decoration: none;
+                color: initial;
+            }
+
+            .code-content-wrapper {
+                display: flex;
+                height: 93%;
+                justify-content: space-between;
+                overflow: hidden;
+            }
+
+            @font-face {
+                font-family: GoogleSans Code;
+                src: url(font/google-sans/GoogleSansCode.otf) format(opentype);
+            } 
+
+            .code-container, .code-part {font-family: GoogleSans Code;}
+            .code-container 
+            {
+                background-color: var(--md-sys-color-surface-variant);
+                padding-left: 20px;
+                padding-top: 5px;
+                padding-right: 20px;
+                padding-bottom: 5px;
+                border-radius: 20px;
+            }
+
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+            width: 7px;
+            height: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background-color: var(--md-sys-color-primary);
+            }
+
+            p {line-height: 29px;} ul {line-height: 29px;}
+
+            .newlevelbigbtn::part(focus-ring) {
+                --md-focus-ring-shape: 20px;
+            }
+        </style>
+    </body>
+</html>

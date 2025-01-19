@@ -5,13 +5,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Level Editor</title>
-        <link rel="icon" href="logo-1024x1024-full.png">
+        <link rel="icon" href="logo.png">
         <link href="style.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.jsdelivr.net/npm/underscore@1.12.0/underscore-min.js"></script>
         
         <meta content="Web Candy Crush Level Editor" property="og:title">
         <meta content="Level editor for candy crush that can be used to export levels in your browser" property="og:description">
         <meta content="Candy Crush Level Editor" property="og:site_name">
+        <version>1.8</version>
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />
@@ -31,17 +32,48 @@
 
             document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
         </script>
-        <script>
+        <script id="mduiAccent">
             document.addEventListener('DOMContentLoaded', () => {
-                mdui.setColorScheme('#ffa4c0');
+                mdui.setColorScheme('#7ac8ef');
             });
         </script>
         <link id="mwcaccent" rel="stylesheet" href="mat-accent-color-light.css">
+        <script type="module" src="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.4.0/index.js"></script>
+        <script>
+            // Function to detect if the user is on a mobile device
+            function isMobileDevice() {
+                return /Mobi|Android/i.test(navigator.userAgent);
+            }
+        
+            // Function to detect if the user is on a tablet or desktop
+            function isTabletOrDesktop() {
+                return !isMobileDevice() || (window.innerWidth >= 768); // Assuming tablets have a width of 768px or more
+            }
+        
+            // Redirect logic
+            window.onload = function() {
+                const currentPath = window.location.pathname;
+        
+                console.log("Current Path:", currentPath);
+                console.log("Is Mobile Device:", isMobileDevice());
+                console.log("Is Tablet or Desktop:", isTabletOrDesktop());
+        
+                if (isMobileDevice() && currentPath.endsWith('index.html')) {
+                    // If on mobile and currently on index.html, redirect to index-mobile.html
+                    console.log("Redirecting to index-mobile.html");
+                    window.location.href = 'index-mobile.html';
+                } else if (isTabletOrDesktop() && currentPath.endsWith('index-mobile.html')) {
+                    // If on tablet/desktop and currently on index-mobile.html, redirect to index.html
+                    console.log("Redirecting to index.html");
+                    window.location.href = 'index.html';
+                }
+            };
+        </script>
     </head>
 
     <body style="margin: 0;">
         <div class="overlay-loading">
-            <md-circular-progress indeterminate></md-circular-progress>
+            <mat-circular-progress></mat-circular-progress>
             <p>Editor is loading, please wait...</p>
         </div>
         <script>
@@ -67,20 +99,15 @@
                 <md-list-item type="link" class="openlevelbigbtn" style="background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; border-top-left-radius: 7px; border-top-right-radius: 7px; margin-top: 3pt; user-select: none;">
                     <md-icon slot="start">folder</md-icon>Open a level
                 </md-list-item>
-                <div class="navd-end" style="position: absolute; bottom: 15;">
-                    <mdui-tooltip content="Version 1.7" variant="rich" placement="right" trigger="click"><md-icon-button class="close-navdrawer"><md-icon>info</md-icon></md-icon-button></mdui-tooltip>
-                    <mdui-dropdown placement="top-right">
-                        <md-icon-button slot="trigger"><md-icon>settings</md-icon></md-icon-button>
-                        <md-list class="menu" style="margin-left: 80px; width: 300px;">
-                            <md-list-item> <md-icon slot="start">dark_mode</md-icon>Dark mode <div slot="end"><mdui-switch id="switchDark" icons></mdui-switch></div></md-list-item>
-                            <md-divider></md-divider>
-                            <md-list-item type="link"> <md-icon slot="start">bug_report</md-icon>Bug report <md-icon slot="end">open_in_new</md-icon></md-list-item>
-                        </md-list>
-                    </mdui-dropdown>
+                <div class="navd-end" style="position: absolute; bottom: 15;"> 
+                    <md-icon-button class="settings-btn"><md-icon>settings</md-icon></md-icon-button>
+                    <p style="font-size: smaller;">© Copyright 2025. Made with ❤️ by Blakiemon and other people.
+                        <a class="footer-href" href="https://discord.gg/kqq5Tx4XcM">Discord server</a> • <a class="footer-href" href="https://forms.gle/XMkahmBmzxN2HUEN9">Bug reports</a>
+                    </p>
                 </div>
             </div>
         </mdui-navigation-drawer>
-            <mdui-top-app-bar class="example-top-app-bar" style="width: 99%; align-items: center; position: fixed; z-index: 10;">
+            <mdui-top-app-bar class="example-top-app-bar" style="width: 99%; align-items: center; position: fixed; z-index: 10; margin: 0 auto; margin-top: 10px;">
                 <md-icon-button class="opennavd">
                     <md-icon>menu</md-icon>
                 </md-icon-button>
@@ -89,18 +116,29 @@
                     <mdui-dropdown>
                         <md-text-button trailing-icon slot="trigger" class="quick-access-acent">File <md-icon slot="icon">arrow_drop_down</md-icon></md-text-button>
                         <md-list class="menu" style="width: 300px;">
-                            <md-list-item type="link" class="newlvl"> <md-icon slot="start">add</md-icon>New <div slot="end">Ctrl + N</div></md-list-item>
+                            <md-list-item type="link" class="newlvl"> <md-icon slot="start">add</md-icon>New <div slot="end">Ctrl + L</div></md-list-item>
                             <md-list-item type="link" class="openlvl"> <md-icon slot="start">folder</md-icon>Open <div slot="end">Ctrl + O</div><input type="file" id="fileInput" accept=".txt" style="display: none;" /></md-list-item>
                             <md-divider></md-divider>
                             <md-list-item type="link" class="export-button" onclick="exportLevelUI()"> <md-icon slot="start">upload</md-icon>Export level <div slot="end">Ctrl + S</div></md-list-item>
                             <md-list-item class="import-main" type="link" onclick="displayImportLevelUI()"> <md-icon slot="start">file_download</md-icon>Import level <div slot="end">Ctrl + I</div></md-list-item>
+                                                         
                         </md-list>
                     </mdui-dropdown>
                     <mdui-dropdown>
                         <md-text-button trailing-icon slot="trigger" class="quick-access-acent">Help <md-icon slot="icon">arrow_drop_down</md-icon></md-text-button>
                         <md-list class="menu" style="width: 300px;">
-                            <md-list-item type="link"> <md-icon slot="start">description</md-icon>Documentation <div slot="end">Alt + L</div></md-list-item>
+                            <md-list-item type="link" target="_blank" href="document.html"> <md-icon slot="start">description</md-icon>Documentation <div slot="end">Alt + M</div></md-list-item>
                             <md-list-item type="link" class="credit-btn"> <md-icon slot="start">info</md-icon>About <div slot="end">Ctrl + B</div></md-list-item>
+                            <mdui-tooltip variant="rich" placement="right" trigger="click" class="keyboardshortcut-tooltip">
+                                <md-list-item class="keyboard-shortcuts" type="link"> <md-icon slot="start">keyboard</md-icon>Keyboard shortcuts <div slot="end">Ctrl + K</div></md-list-item>
+                                <div slot="content">
+                                    <p><span class="key-keyb">CTRL</span> + <span class="key-keyb">L</span>: New level</p>
+                                    <p><span class="key-keyb">CTRL</span> + <span class="key-keyb">O</span>: Open level</p>
+                                    <p><span class="key-keyb">CTRL</span> + <span class="key-keyb">S</span>: Save level</p>
+                                    <p><span class="key-keyb">CTRL</span> + <span class="key-keyb">I</span>: Import level</p>
+                                    <p><span class="key-keyb">CTRL</span> + <span class="key-keyb">B</span>: About</p>
+                                </div>
+                            </mdui-tooltip>
                         </md-list>
                     </mdui-dropdown>
                 </div>
@@ -404,13 +442,41 @@
                                     </mdui-collapse-item>
                                 </mdui-collapse>
                             </mdui-card><br>
+                            <mdui-card variant="outlined" style="border-radius: 20px; background-color: #00000000;">
+                                <mdui-collapse value="opened">
+                                    <mdui-collapse-item value="opened">
+                                        <md-list-item slot="header" type="link" style="user-select: none; display: flex; place-items: center; align-items: center;">Candy Cobra <span class="beta-text">BETA</span> <md-icon slot="end">keyboard_arrow_down</md-icon></md-list-item>
+                                        <div id="candy-cobra-section" style="display: block;">
+                                            <div class="sideoptions">
+                                                <md-list-item style="background-color: var(--md-sys-color-secondary-container); border-radius: 15px;" type="text" md-list-item="">
+                                                    <md-icon slot="start" aria-hidden="true">warning</md-icon>If you don't have a property created but you see <code>"candyCobras":3</code> then delete it, if the code format is incorrect then please remove the parentheses and change from 0.1 to 0,1 (change the dot to comma)
+                                                </md-list-item>
+                                                <div class="break"></div>
+                                                <br>
+                                                <md-outlined-text-field type="number" label="From tile number" placeholder="0" id="startTileCobra"></md-outlined-text-field>
+                                                <div class="break"></div>
+                                                <br>
+                                                <md-outlined-text-field type="number" label="Candy Cobra Layer (1-5)" placeholder="0" id="cobraLayer"></md-outlined-text-field>
+                                                <div class="break"></div>
+                                                <br>
+                                                <md-outlined-text-field type="number" label="To tile number" placeholder="0" id="endTileCobra"></md-outlined-text-field>
+                                                <div class="break"></div>
+                                                <br>
+                                                <md-outlined-button id="addProperty" onclick="addCobraProperty()">Add Candy Cobra Property</md-outlined-button>
+                                            </div>
+                                            <div id="cobraproperty">
+                                            </div>
+                                        </div>
+                                    </mdui-collapse-item>
+                                </mdui-collapse>
+                            </mdui-card><br>
                         </md-list>
                         
         
         
                         
                     </div>
-        
+
                     <div class="sideselection">
                         <br><br><br>
                         <md-list style="background-color: var(--md-sys-color-surface-container-low); border-top-right-radius: 20px; margin-top: 10px;">
@@ -881,23 +947,81 @@
                                     </div>
                                 </mdui-collapse-item>
                             </mdui-collapse>
+                            <md-divider inset></md-divider>
+                            <mdui-collapse>
+                                <mdui-collapse-item>
+                                    <md-list-item type="link" slot="header" style="user-select: none;">
+                                        <img width="30px" slot="start" src="gumball_machine.webp"/>Gumball Machine
+                                        <md-icon slot="end">keyboard_arrow_down</md-icon>
+                                    </md-list-item>
+                                    <div style="background-color: var(--md-sys-color-surface-container-highest); border-radius: 20px;">
+                                        <div class="dropped" id="gumball">
+                                            <div class="selectelement" element="gumball_machine_empty" gamelayer="normal"></div><div class="selectelement" element="gumball_machine" gamelayer="normal"></div>
+                                        </div>
+                                    </div>
+                                </mdui-collapse-item>
+                            </mdui-collapse>
+                            <md-divider inset></md-divider>
+                            <mdui-collapse>
+                                <mdui-collapse-item>
+                                    <md-list-item type="link" slot="header" style="user-select: none;">
+                                        <img width="30px" slot="start" src="elements/conveyor_tex.webp"/>Teleporter
+                                        <md-icon slot="end">keyboard_arrow_down</md-icon>
+                                    </md-list-item>
+                                    <div style="background-color: var(--md-sys-color-surface-container-highest); border-radius: 20px;">
+                                        <p style="margin-left: 20px; margin-top: 20px; padding-top: 20px;">In progress</p>
+                                        <div class="dropped" id="teleporterentryexit" style="filter: blur(20px); user-select: none; pointer-events: none;">
+                                            <md-list-item style="background-color: var(--md-sys-color-secondary-container); border-radius: 15px;">
+                                                <md-icon slot="start">warning</md-icon><strong>14</strong> is very important for teleporters' codes, it can hide, or show the elements in the board.
+                                            </md-list-item>
+                                            <md-list-item style="width: 100%;">
+                                                Entry Coordinate
+                                                <md-outlined-text-field id="entryCoordinate" type="number" slot="end" draggable="false" label="0,0,14" style="width: 120px;"></md-outlined-text-field>
+                                            </md-list-item>
+                                            <md-list-item style="width: 100%;">
+                                                Exit Coordinate
+                                                <md-outlined-text-field type="number" id="exitCoordinate" slot="end" draggable="false" label="0,0,14" style="width: 120px;"></md-outlined-text-field>
+                                            </md-list-item>
+                                            <md-outlined-button id="addTeleporters">Add teleporter</md-outlined-button>
+                                        </div>
+                                    </div>
+                                </mdui-collapse-item>
+                            </mdui-collapse>
+                            <md-divider inset></md-divider>
+                            <mdui-collapse>
+                                <mdui-collapse-item>
+                                    <md-list-item type="link" slot="header" style="user-select: none;">
+                                        <img width="30px" slot="start" src="elements/cobra_5.png"/>Candy Cobra
+                                        <md-icon slot="end">keyboard_arrow_down</md-icon>
+                                    </md-list-item>
+                                    <div style="background-color: var(--md-sys-color-surface-container-highest); border-radius: 20px;">
+                                        <div class="dropped" id="candycobra">
+                                            <div class="selectelement" element="cobra_1" gamelayer="normal"></div>
+                                            <div class="selectelement" element="cobra_2" gamelayer="normal"></div>
+                                            <div class="selectelement" element="cobra_3" gamelayer="normal"></div>
+                                            <div class="selectelement" element="cobra_4" gamelayer="normal"></div>
+                                            <div class="selectelement" element="cobra_5" gamelayer="normal"></div>
+                                            <div class="selectelement" element="cobra_basket" gamelayer="cobra_basket"></div>
+                                        </div>
+                                    </div>
+                                </mdui-collapse-item>
+                            </mdui-collapse>
                         </md-list>
                     </div>
         
                     <div class="vertical-center" width="100px" style="top:56%">
-                        <table id="level" cellspacing="0"></table>
+                        <table id="level" cellspacing="0">
+                        </table>
                     </div>
                 </div>
                 
-                <mdui-dialog close-on-overlay-click class="export-dialog">
+                <mdui-dialog close-on-overlay-click >
                     <div slot="headline">
                         Export successful
                     </div>
                     <md-icon slot="icon">check</md-icon>
                     <div class="body">
-                        <form slot="content" id="form-id" method="dialog">
-                            <md-outlined-text-field type="textarea" id="exportfield" name="exportfield" readonly style="overflow: hidden; width: 510px; height: 313px; font-family: monospace;"></md-outlined-text-field>
-                        </form>
+                        
                         <br>
                         <md-filled-text-field id="export-name" style="width: 510px;" label="Set your file name" suffix-text=".txt"></md-filled-text-field>
                     </div>
@@ -938,7 +1062,6 @@
                         About
                     </div>
                     <div class="body">
-                        <md-list-item><md-icon slot="start">info</md-icon>Version 1.7 <div slot="end"><md-outlined-button id="websiteUpdatesCheck">Check for updates</md-outlined-button> <md-filled-button id="gpbackOldVer" disabled>Change version</md-filled-button></div></md-list-item>
                         <md-list style="--md-list-container-color: var(--md-sys-color-error-container); --md-list-item-label-text-color: var(--md-sys-color-error); border-radius: 20px;"><md-list-item>
                             <md-icon slot="start" style="color: var(--md-sys-color-error);">release_alert</md-icon>All right go to King Limited. If they so chose this editor may be taken down at any time.
                         </md-list-item></md-list>
@@ -966,44 +1089,6 @@
                     </div>
                     <md-filled-button slot="action" class="ok-btn">OK</md-filled-button>
                 </mdui-dialog>
-                <mdui-dialog close-on-overlay-click class="settings-dialog">
-                    <div slot="headline">
-                        Settings
-                    </div>
-                    <div class="body">
-                        <mdui-layout>
-                            <mdui-layout-main class="example-layout-main" style="min-height: 200px; width: 1200px;">
-                                <label>
-                                    Change background image:
-                                    <br><br>
-                                    <md-filled-select>
-                                        <md-select-option aria-label="blank"></md-select-option>
-                                        <md-select-option selected value="10k">
-                                          <div slot="headline">10K Celebrate</div>
-                                        </md-select-option>
-                                        <md-select-option value="solitaire">
-                                            <div slot="headline">CC Solitaire background</div>
-                                          </md-select-option>
-                                        <md-select-option value="ep1">
-                                          <div slot="headline">CCS Ep1 Bg</div>
-                                        </md-select-option>
-                                    </md-filled-select>
-                                    <br><br>
-                                </label>
-                                <label style="display: flex; place-items: center; gap: 80%;">
-                                    Dark mode
-                                    <md-switch disabled></md-switch>
-                                </label>
-                                <br>
-                                <md-text-button onclick="window.open('https://forms.gle/98bBg4Vwgj2PDT6T6')" style="border-radius: 4px;" trailing-icon>
-                                    Send bugs
-                                    <svg slot="icon" viewBox="0 0 48 48"><path d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h13.95v3H9v30h30V25.05h3V39q0 1.2-.9 2.1-.9.9-2.1.9Zm10.1-10.95L17 28.9 36.9 9H25.95V6H42v16.05h-3v-10.9Z"/></svg>
-                                </md-text-button>
-                            </mdui-layout-main>
-                        </mdui-layout>
-                    </div>
-                    <md-filled-button slot="action" class="apply-btn">OK</md-filled-button>
-                </mdui-dialog>
                 <mdui-dialog close-on-overlay-click class="newlvl-dialog">
                     <div slot="headline">
                         New level
@@ -1011,9 +1096,126 @@
                     <div class="body">
                         Do you want to save the current level?
                     </div>
-                    <md-outlined-button slot="action" class="cancel-save">No</md-outlined-button>
+                    <md-outlined-button slot="action" class="cancel-save" onclick="location.reload();">No</md-outlined-button>
                     <md-filled-button slot="action" class="current-save" onclick="exportLevelUI()">Yes</md-filled-button>
                 </mdui-dialog>
+                <forge-dialog aria-labelledby="dialog-title" preset="bottom-sheet" class="export-dialog" style="--forge-dialog-shape: 20px; --forge-dialog-background: rgb(var(--mdui-color-surface-container-low)); --forge-dialog-elevation: 0;">
+                    <forge-scaffold id="levelResult" style="padding: 20px; display: none;">
+                      <h1 class="forge-typography--heading4" id="dialog-title" slot="header">
+                          Level exported successfully!
+                      </h1>
+                      <form slot="body" id="form-id" method="dialog">
+                          <p>Your level code:</p>
+                          <md-outlined-text-field type="textarea" id="exportfield" name="exportfield" style="overflow: hidden; width: 910px; height: 313px; font-family: monospace;"></md-outlined-text-field>
+                      </form>
+                      <md-list slot="footer" style="height: 50px; background-color: #00000000; margin-bottom: 120px;">
+                          <md-list-item>
+                              <p>Share your level or save to your device! Shorten your URL using third party if needed.</p>
+                              <div id="sharingContainer">
+                                  <div tabindex="0" class="buttonsharing" onclick="saveExport()">
+                                      <div class="avatar-big-button"><md-icon>download</md-icon></div>
+                                      Save
+                                      <md-ripple></md-ripple>
+                                  </div>
+                                  <div tabindex="0" class="buttonsharing" id="facebookShare" onclick="shareOnFacebook()" style="width: 70px;">
+                                      <div class="avatar-big-button"><svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" id="svg9" width="666.66669" height="666.66718" viewBox="0 0 666.66668 666.66717" style="filter: invert(0);"><script xmlns=""/><script xmlns=""/>
+                                          <defs id="defs13">
+                                            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath25">
+                                              <path d="M 0,700 H 700 V 0 H 0 Z" id="path23"/>
+                                            </clipPath>
+                                          </defs>
+                                          <g id="g17" transform="matrix(1.3333333,0,0,-1.3333333,-133.33333,799.99999)">
+                                            <g id="g19">
+                                              <g id="g21" clip-path="url(#clipPath25)">
+                                                <g id="g27" transform="translate(600,350)">
+                                                  <path d="m 0,0 c 0,138.071 -111.929,250 -250,250 -138.071,0 -250,-111.929 -250,-250 0,-117.245 80.715,-215.622 189.606,-242.638 v 166.242 h -51.552 V 0 h 51.552 v 32.919 c 0,85.092 38.508,124.532 122.048,124.532 15.838,0 43.167,-3.105 54.347,-6.211 V 81.986 c -5.901,0.621 -16.149,0.932 -28.882,0.932 -40.993,0 -56.832,-15.528 -56.832,-55.9 V 0 h 81.659 l -14.028,-76.396 h -67.631 V -248.169 C -95.927,-233.218 0,-127.818 0,0" style="fill:#0866ff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path29"/>
+                                                </g>
+                                                <g id="g31" transform="translate(447.9175,273.6036)">
+                                                  <path d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.831 L -67.63,0 Z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path33"/>
+                                                </g>
+                                              </g>
+                                            </g>
+                                          </g>
+                                        <script xmlns=""/></svg></div>
+                                      Facebook
+                                      <md-ripple></md-ripple>
+                                  </div>
+                                  <div tabindex="0" class="buttonsharing" id="xShare" onclick="shareOnX()">
+                                      <div class="avatar-big-button" style="background-color: #ffffff;">
+                                          <img src="X_icon.svg.png" width="48px">
+                                      </div>
+                                      X
+                                      <md-ripple></md-ripple>
+                                  </div>
+                                  <div tabindex="0" class="buttonsharing" id="emailShare" onclick="shareViaEmail()">
+                                      <div class="avatar-big-button"><md-icon>email</md-icon></div>
+                                      Email
+                                      <md-ripple></md-ripple>
+                                  </div>
+                                  <div tabindex="0" class="buttonsharing" id="copyLink" style="width: 70px;">
+                                      <div class="avatar-big-button"><md-icon id="confirmationCopy">link</md-icon></div>
+                                      Copy link
+                                      <md-ripple></md-ripple>
+                                  </div>
+                              </div>
+                          </md-list-item>
+                      </md-list>
+                    </forge-scaffold>
+                    <forge-scaffold id="fakeLoading" style="padding: 20px;">
+                        <div slot="body" style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                            <mat-circular-progress></mat-circular-progress>
+                            <p>Generating your level code...</p>
+                        </div>
+                    </forge-scaffold>
+                </forge-dialog>
+                <forge-dialog class="settings-fulldialog" style="--forge-dialog-shape: 30px; --forge-dialog-background: var(--md-sys-color-surface-container-high); width: 90vh;">
+                    <forge-scaffold style="margin: 0;">
+                        <mdui-layout slot="body">
+                            <mdui-top-app-bar variant="elevated" scrolling scroll-behavior="elevate" scroll-target=".example-scroll-behavior-elevate">
+                                <md-icon-button class="close-settings">
+                                    <md-icon>close</md-icon>
+                                </md-icon-button>
+                                <mdui-top-app-bar-title><strong>Settings</strong></mdui-top-app-bar-title>
+                                <div style="flex-grow: 1"></div>
+                            </mdui-top-app-bar>
+                            <mdui-layout-main>
+                                <md-list>
+                                    <md-list-item>
+                                        Enable dark mode
+                                        <forge-switch id="switchDark" icon="none" slot="end" style="--forge-switch-track-on-color: var(--md-sys-color-inverse-primary); --forge-switch-handle-on-color: var(--md-sys-color-primary);"></forge-switch>
+                                    </md-list-item>
+                                    <md-divider></md-divider>
+                                    <mdui-collapse>
+                                        <mdui-collapse-item>
+                                            <md-list-item slot="header" type="link">Themes <md-icon slot="end">keyboard_arrow_down</md-icon></md-list-item>
+                                            <div style="margin-left: 15px; padding: 10px; overflow: hidden;">
+                                                <mdui-radio-group id="themesRadios" value="default">
+                                                    <mdui-radio value="default">Default</mdui-radio><br>
+                                                    <mdui-radio disabled value="lipstick">Lipstick color</mdui-radio><br>
+                                                    <mdui-radio disabled value="green">Green</mdui-radio><br>
+                                                    <mdui-radio disabled value="purple">Purple</mdui-radio>
+                                                </mdui-radio-group>
+                                            </div>
+                                        </mdui-collapse-item>
+                                    </mdui-collapse>
+                                    <md-divider></md-divider>
+                                    <md-list-item type="link" href="https://forms.gle/XMkahmBmzxN2HUEN9" target="_blank">
+                                        Bug report
+                                        <md-icon slot="end">open_in_new</md-icon>
+                                    </md-list-item>
+                                    <md-divider></md-divider>
+                                    <md-list-item>
+                                        <md-icon slot="start">info</md-icon>
+                                        Version 1.8
+                                        <forge-button id="checkUpdates" slot="end" style="--forge-button-background: var(--md-sys-color-primary); --forge-button-color: var(--md-sys-color-on-primary);">Check for updates</forge-button>
+                                        <forge-button slot="end" style=" --forge-button-color: var(--md-sys-color-primary);">View changelogs</forge-button>
+                                    </md-list-item>
+                                </md-list>
+                                <mdui-snackbar closeable class="updates-notify">You're using the latest version of Level Editor!</mdui-snackbar>
+                            </mdui-layout-main>
+                        </mdui-layout>
+                    </forge-scaffold>
+                </forge-dialog>
             </mdui-layout-main>
 
             <script>
@@ -1168,7 +1370,7 @@
                 const darkModeSwitch = document.getElementById('switchDark');
 
                 // Check if the switch is checked
-                if (darkModeSwitch.checked) {
+                if (darkModeSwitch.selected) {
                     // Add the dark theme class to the HTML element
                     document.documentElement.classList.add('mdui-theme-dark');
 
@@ -1190,6 +1392,286 @@
 
             // Initial check on page load
             document.addEventListener('DOMContentLoaded', checkDarkMode);
+        </script>
+
+        <script>
+            // Function to generate and copy the link
+            function generateAndCopyLink() {
+                console.log("generateAndCopyLink function called"); // Debugging log
+
+                // Get the content from the #exportfield text field
+                const exportFieldContent = document.getElementById('exportfield').value;
+                console.log("Export field content:", exportFieldContent); // Debugging log
+
+                // Check if the content is empty
+                if (!exportFieldContent) {
+                    alert("The export field is empty!");
+                    return;
+                }
+
+                // Encode the content for use in a URL
+                const encodedContent = encodeURIComponent(exportFieldContent);
+                console.log("Encoded content:", encodedContent); // Debugging log
+
+                // Get the base URL (first part of the active address before the "/")
+                const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/');
+                console.log("Base URL:", baseUrl); // Debugging log
+
+                // Generate the full link
+                const generatedLink = `${baseUrl}/generatedlevel.html?content=${encodedContent}`;
+                console.log("Generated link:", generatedLink); // Debugging log
+
+                // Copy the link to the clipboard
+                navigator.clipboard.writeText(generatedLink).then(() => {
+                    console.log("Link copied to clipboard!"); // Debugging log
+
+                    // Change the icon from 'link' to 'check'
+                    const confirmationCopyIcon = document.getElementById('confirmationCopy');
+                    if (confirmationCopyIcon) {
+                        confirmationCopyIcon.textContent = 'check'; // Change the icon to 'check'
+
+                        // Revert the icon back to 'link' after 3 seconds
+                        setTimeout(() => {
+                            confirmationCopyIcon.textContent = 'link'; // Revert to 'link'
+                        }, 3000); // Revert after 3 seconds
+                    }
+                }).catch((error) => {
+                    console.error("Failed to copy link:", error); // Debugging log
+                    alert("Failed to copy link. Please try again.");
+                });
+            }
+
+            // Attach the function to the #copyLink button
+            document.addEventListener('DOMContentLoaded', () => {
+                const copyLinkButton = document.getElementById('copyLink');
+                if (copyLinkButton) {
+                    console.log("Copy link button found!"); // Debugging log
+                    copyLinkButton.addEventListener('click', generateAndCopyLink);
+                } else {
+                    console.error("Copy link button not found!"); // Debugging log
+                }
+            });
+        </script>
+
+        <script>
+            // Function to generate the link
+            function generateLink() {
+                console.log("generateLink function called"); // Debugging log
+
+                // Get the content from the #exportfield text field
+                const exportFieldContent = document.getElementById('exportfield').value;
+                console.log("Export field content:", exportFieldContent); // Debugging log
+
+                // Check if the content is empty
+                if (!exportFieldContent) {
+                    alert("The export field is empty!");
+                    return null;
+                }
+
+                // Encode the content for use in a URL
+                const encodedContent = encodeURIComponent(exportFieldContent);
+                console.log("Encoded content:", encodedContent); // Debugging log
+
+                // Get the base URL (first part of the active address before the "/")
+                const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/');
+                console.log("Base URL:", baseUrl); // Debugging log
+
+                // Generate the full link
+                const generatedLink = `${baseUrl}/generatedlevel.html?content=${encodedContent}`;
+                console.log("Generated link:", generatedLink); // Debugging log
+
+                return generatedLink;
+            }
+
+            // Function to share on Facebook
+            function shareOnFacebook() {
+                const generatedLink = generateLink();
+                if (!generatedLink) return;
+
+                // Facebook sharing URL
+                const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(generatedLink)}`;
+                console.log("Facebook share URL:", facebookShareUrl); // Debugging log
+
+                // Open the Facebook sharing dialog in a new window
+                window.open(facebookShareUrl, '_blank');
+            }
+
+            // Function to share on X (Twitter)
+            function shareOnX() {
+                const generatedLink = generateLink();
+                if (!generatedLink) return;
+
+                // X (Twitter) sharing URL
+                const xShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(generatedLink)}`;
+                console.log("X share URL:", xShareUrl); // Debugging log
+
+                // Open the X sharing dialog in a new window
+                window.open(xShareUrl, '_blank');
+            }
+
+            // Function to share via email
+            function shareViaEmail() {
+                const generatedLink = generateLink();
+                if (!generatedLink) return;
+
+                // Email sharing URL
+                const emailShareUrl = `mailto:?body=${encodeURIComponent(generatedLink)}`;
+                console.log("Email share URL:", emailShareUrl); // Debugging log
+
+                // Open the default email client
+                window.location.href = emailShareUrl;
+            }
+
+            // Attach event listeners to the buttons
+            document.addEventListener('DOMContentLoaded', () => {
+                // Facebook Share
+                const facebookShareButton = document.getElementById('facebookShare');
+                if (facebookShareButton) {
+                    facebookShareButton.addEventListener('click', shareOnFacebook);
+                } else {
+                    console.error("Facebook share button not found!"); // Debugging log
+                }
+
+                // X Share
+                const xShareButton = document.getElementById('xShare');
+                if (xShareButton) {
+                    xShareButton.addEventListener('click', shareOnX);
+                } else {
+                    console.error("X share button not found!"); // Debugging log
+                }
+
+                // Email Share
+                const emailShareButton = document.getElementById('emailShare');
+                if (emailShareButton) {
+                    emailShareButton.addEventListener('click', shareViaEmail);
+                } else {
+                    console.error("Email share button not found!"); // Debugging log
+                }
+            });
+        </script>
+
+        <script>
+            // Function to hide #fakeLoading and show #levelResult after 2 seconds
+            function showLevelResult() {
+                // Get the elements
+                const fakeLoading = document.getElementById('fakeLoading');
+                const levelResult = document.getElementById('levelResult');
+
+                // Check if the elements exist
+                if (!fakeLoading || !levelResult) {
+                    console.error("Elements not found!");
+                    return;
+                }
+
+                // Hide #fakeLoading and show #levelResult after 2 seconds
+                setTimeout(() => {
+                    fakeLoading.style.display = 'none'; // Hide #fakeLoading
+                    levelResult.style.display = 'block'; // Show #levelResult
+                }, 2000); // 2000 milliseconds = 2 seconds
+            }
+
+            // Function to observe the .export-dialog for the 'open' attribute
+            function observeExportDialog() {
+                // Get the .export-dialog element
+                const exportDialog = document.querySelector('.export-dialog');
+
+                // Check if the dialog exists
+                if (!exportDialog) {
+                    console.error(".export-dialog not found!");
+                    return;
+                }
+
+                // Create a MutationObserver to watch for changes to the 'open' attribute
+                const observer = new MutationObserver((mutationsList) => {
+                    for (const mutation of mutationsList) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'open') {
+                            // Check if the dialog is open
+                            if (exportDialog.hasAttribute('open')) {
+                                console.log(".export-dialog is now open!");
+                                // Call the function to show the level result after 2 seconds
+                                showLevelResult();
+                            }
+                        }
+                    }
+                });
+
+                // Start observing the .export-dialog for attribute changes
+                observer.observe(exportDialog, {
+                    attributes: true, // Watch for attribute changes
+                });
+            }
+
+            // Call the observer function when the DOM is fully loaded
+            document.addEventListener('DOMContentLoaded', observeExportDialog);
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Function to trigger a click event on a given selector
+                const triggerClick = (selector) => {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        element.click();
+                    } else {
+                        console.error(`Element with selector "${selector}" not found.`);
+                    }
+                };
+        
+                // Listen for keyboard shortcuts
+                document.addEventListener("keydown", (event) => {
+                    const tooltipKeyboard = document.querySelector('.keyboardshortcut-tooltip');
+                    if (event.ctrlKey) {
+                        switch (event.key.toLowerCase()) {
+                            case 'l':
+                                event.preventDefault(); // Prevent default browser behavior
+                                triggerClick(".newlvl"); // Trigger click on .newlvl
+                                break;
+                            case 's':
+                                event.preventDefault(); // Prevent default browser behavior
+                                triggerClick(".export-button"); // Trigger click on .export-button
+                                break;
+                            case 'i':
+                                event.preventDefault(); // Prevent default browser behavior
+                                triggerClick(".import-main"); // Trigger click on .import-main
+                                break;
+                            case 'b':
+                                event.preventDefault(); // Prevent default browser behavior
+                                triggerClick(".credit-btn"); // Trigger click on .credit-btn
+                                break;
+                            case 'k':
+                                event.preventDefault(); // Prevent default browser behavior
+                                triggerClick(".keyboard-shortcuts"); // Trigger click on .credit-btn
+                                break;
+                                tooltipKeyboard.setAttribute('open', 'open'); 
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            const updateSnackbar = document.querySelector(".updates-notify");
+            const checkUpdates = document.getElementById("checkUpdates");
+
+            checkUpdates.addEventListener("click", () => updateSnackbar.open = true);
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const settingsBtn = document.querySelector('.settings-btn');
+                const settingsFulldialog = document.querySelector('.settings-fulldialog');
+                const closeSettings = document.querySelector('.close-settings');
+
+                // Add event listener to settings button
+                settingsBtn.addEventListener('click', function () {
+                    settingsFulldialog.setAttribute('open', '');
+                });
+
+                // Add event listener to close settings button
+                closeSettings.addEventListener('click', function () {
+                    settingsFulldialog.removeAttribute('open');
+                });
+            });
         </script>
     </body>
 </html>
