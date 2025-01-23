@@ -15,7 +15,7 @@
 }
 
 body, html, p, span, h1, h2, h3, h4, h5 {
-    font-family: Google Sans, 'Google Sans', 'Roboto';
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
 }
 
 md-icon, .icon, #icon, [icon] {
@@ -299,10 +299,7 @@ img[src="elements/cake_top_right.png"], img[src="elements/cake_bottom_right.png"
 
 .vertical-center {
     margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    position: absolute; 
     z-index: 9;
   }
 
@@ -859,13 +856,14 @@ body.fade-in {
 }
 
 .sidebottom {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     width: 100%;
     background-color: var(--md-sys-color-surface-container-low);
-    height: 40%;
+    height: 50%;
     bottom: 0;
     overflow: auto;
+    left: 0;
 }
 
 mdui-tabs {
@@ -929,4 +927,13 @@ version {display: none;}
     display: flex;
     place-items: center;
     gap: 10px;
+}
+
+
+iframe {
+    background: transparent;
+}
+
+pre, code {
+    font-family: 'Google Sans Code', monospace;
 }

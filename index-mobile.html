@@ -3,7 +3,7 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Level Editor</title>
         <link rel="icon" href="logo.png">
         <link href="style.css" rel="stylesheet" type="text/css" />
@@ -11,7 +11,7 @@
         
         <meta content="Web Candy Crush Level Editor" property="og:title">
         <meta content="Level editor for candy crush that can be used to export levels in your browser" property="og:description">
-        <version>1.8</version>
+        <version>1.8.1</version>
         <meta content="Candy Crush Level Editor" property="og:site_name">
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta http-equiv="Pragma" content="no-cache" />
@@ -69,6 +69,14 @@
                 }
             };
         </script>
+        <style>
+            .vertical-center {
+                margin: 0;
+                position: absolute; 
+                z-index: 9;
+                left: 25%; 
+            }
+        </style>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
@@ -1016,7 +1024,7 @@
                                                   <path d="m 0,0 c 0,138.071 -111.929,250 -250,250 -138.071,0 -250,-111.929 -250,-250 0,-117.245 80.715,-215.622 189.606,-242.638 v 166.242 h -51.552 V 0 h 51.552 v 32.919 c 0,85.092 38.508,124.532 122.048,124.532 15.838,0 43.167,-3.105 54.347,-6.211 V 81.986 c -5.901,0.621 -16.149,0.932 -28.882,0.932 -40.993,0 -56.832,-15.528 -56.832,-55.9 V 0 h 81.659 l -14.028,-76.396 h -67.631 V -248.169 C -95.927,-233.218 0,-127.818 0,0" style="fill:#0866ff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path29"/>
                                                 </g>
                                                 <g id="g31" transform="translate(447.9175,273.6036)">
-                                                  <path d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.831 L -67.63,0 Z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path33"/>
+                                                  <path d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.8.131 L -67.63,0 Z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path33"/>
                                                 </g>
                                               </g>
                                             </g>
@@ -1070,6 +1078,49 @@
                                         <forge-switch id="switchDark" icon="none" slot="end" style="--forge-switch-track-on-color: var(--md-sys-color-inverse-primary); --forge-switch-handle-on-color: var(--md-sys-color-primary);"></forge-switch>
                                     </md-list-item>
                                     <md-divider></md-divider>
+                                    <forge-expansion-panel>
+                                        <md-list-item slot="header">
+                                            Music and sound
+                                            <div style="display: flex; place-items: center; gap: 10px;" slot="end">
+                                                <forge-open-icon></forge-open-icon>
+                                            </div>
+                                        </md-list-item>
+                                        <div style="margin-left: 15px; padding: 10px; overflow: hidden;">
+                                                  <div>
+                                                    <md-list>
+                                                        <md-list-item id="candy-fantasia" type="link" href="javascript:void(0)"> <md-icon slot="start">music_note</md-icon> Candy Fantasia </md-list-item>
+                                                        <md-list-item id="candy-caravan" type="link" href="javascript:void(0)"> <md-icon slot="start">music_note</md-icon> Candy Caravan </md-list-item>
+                                                        <md-list-item id="frosted-brain" type="link" href="javascript:void(0)"> <md-icon slot="start">music_note</md-icon> Frosted Brain </md-list-item>
+                                                        <md-list-item id="candy-hour" type="link" href="javascript:void(0)"> <md-icon slot="start">music_note</md-icon> Candy Hour </md-list-item>
+                                                        <md-list-item id="pop-the-candy" type="link" href="javascript:void(0)"> <md-icon slot="start">music_note</md-icon> Pop The Candy </md-list-item>
+                                                    </md-list>
+                                                  </div>
+                                                  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                                    <md-list-item style="background-color: var(--md-sys-color-secondary-container); border-radius: 20px; width: 90%;">
+                                                        <md-icon slot="start">music_note</md-icon>
+                                                        <div slot="headline" id="songName">?</div>
+                                                        <md-icon-button slot="end" id="playSong">
+                                                            <md-icon>play_arrow</md-icon>
+                                                        </md-icon-button>
+                                                    </md-list-item>
+                                                    <audio id="musicMain" loop>
+                                                        <source id="musicSrc" src="audio/songs/Editor_Song_Theme_Candy_Fantasia.ogg" type="audio/ogg">
+                                                    </audio>
+                                                    <md-list-item>
+                                                        <md-icon-button id="mute" slot="start">
+                                                            <md-icon>volume_up</md-icon>
+                                                        </md-icon-button>
+                                                        <md-slider id="volumeCustomize" min="0" max="1" step="0.01" value="1"></md-slider>
+                                                    </md-list-item>
+                                                  </div>
+                                            <md-divider></md-divider>
+                                            <md-list-item>
+                                                Enable clicking sound
+                                                <forge-switch id="switchClick" icon="none" slot="end" style="--forge-switch-track-on-color: var(--md-sys-color-inverse-primary); --forge-switch-handle-on-color: var(--md-sys-color-primary);"></forge-switch>
+                                            </md-list-item>
+                                        </div>
+                                    </forge-expansion-panel>
+                                    <md-divider></md-divider>
                                     <mdui-collapse>
                                         <mdui-collapse-item>
                                             <md-list-item slot="header" type="link">Themes <md-icon slot="end">keyboard_arrow_down</md-icon></md-list-item>
@@ -1091,7 +1142,7 @@
                                     <md-divider></md-divider>
                                     <md-list-item>
                                         <md-icon slot="start">info</md-icon>
-                                        Version 1.8
+                                        Version 1.8.1
                                         <forge-button id="checkUpdates" slot="end" style="--forge-button-background: var(--md-sys-color-primary); --forge-button-color: var(--md-sys-color-on-primary);">Check for updates</forge-button>
                                         <forge-button slot="end" style=" --forge-button-color: var(--md-sys-color-primary);">View changelogs</forge-button>
                                     </md-list-item>
@@ -1101,6 +1152,7 @@
                         </mdui-layout>
                     </forge-scaffold>
                 </forge-dialog>
+                <audio id="clickSound" src="audio/ui/Generic_Button_Sound_Effect.wav"></audio>
             </mdui-layout-main>
 
             <script>
@@ -1581,5 +1633,89 @@
                 }
             }
         </script>  
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const musicConfig = document.getElementById('musicConfig');
+                const musicMain = document.getElementById('musicMain');
+                const musicSrc = document.getElementById('musicSrc');
+                const playSongButton = document.getElementById('playSong');
+                const muteButton = document.getElementById('mute');
+                const volumeCustomize = document.getElementById('volumeCustomize');
+                const enableMusic = document.getElementById('enableMusic');
+                const songNameDisplay = document.getElementById('songName'); // Element to display the song name
+
+                // Function to change music source and play
+                function changeMusicSource(source, songName) {
+                    musicSrc.src = source;
+                    musicMain.load();
+                    musicMain.play();
+                    songNameDisplay.textContent = songName; // Display the song name
+                }
+
+                // Event listeners for music selection
+                document.getElementById('candy-fantasia').addEventListener('click', function() {
+                    changeMusicSource('audio/songs/Editor_Song_Theme_Candy_Fantasia.ogg', 'Candy Fantasia');
+                });
+
+                document.getElementById('candy-caravan').addEventListener('click', function() {
+                    changeMusicSource('audio/songs/Editor_Song_Theme_Candy_Caravan.ogg', 'Candy Caravan');
+                });
+
+                document.getElementById('frosted-brain').addEventListener('click', function() {
+                    changeMusicSource('audio/songs/Editor_Song_Theme_Frosted_Brain.ogg', 'Frosted Brain');
+                });
+
+                document.getElementById('candy-hour').addEventListener('click', function() {
+                    changeMusicSource('audio/songs/Editor_Song_Theme_Candy_Hour.ogg', 'Candy Hour');
+                });
+
+                document.getElementById('pop-the-candy').addEventListener('click', function() {
+                    changeMusicSource('audio/songs/Editor_Song_Theme_Pop_The_Candy.ogg', 'Pop The Candy');
+                });
+
+                // Play/Pause functionality
+                playSongButton.addEventListener('click', function() {
+                    const mdIcon = playSongButton.querySelector('md-icon'); // Select the md-icon inside the button
+                    if (musicMain.paused) {
+                        musicMain.play();
+                        mdIcon.textContent = 'pause'; // Change to pause icon
+                    } else {
+                        musicMain.pause();
+                        mdIcon.textContent = 'play_arrow'; // Change to play icon
+                    }
+                });
+
+                // Mute/Unmute functionality
+                muteButton.addEventListener('click', function() {
+                    const mdIcon = muteButton.querySelector('md-icon'); // Select the md-icon inside the button
+                    musicMain.muted = !musicMain.muted;
+                    mdIcon.textContent = musicMain.muted ? 'volume_off' : 'volume_up'; // Change icon based on mute state
+                });
+
+                // Volume control using md-slider
+                volumeCustomize.addEventListener('input', function() {
+                    musicMain.volume = volumeCustomize.value; // Set the audio volume based on slider value
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const switchClick = document.getElementById('switchClick');
+                const clickSound = document.getElementById('clickSound');
+
+                // Function to play sound
+                function playClickSound() {
+                    if (switchClick.selected) {
+                        clickSound.currentTime = 0; // Reset sound to start
+                        clickSound.play(); // Play the sound
+                    }
+                }
+
+                // Add event listener to the entire document
+                document.addEventListener('click', playClickSound);
+            });
+</script>
     </body>
 </html>
