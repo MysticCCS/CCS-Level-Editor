@@ -275,6 +275,18 @@
                                     </mdui-collapse-item>
                                 </mdui-collapse>
                             </mdui-card>
+                            <br><mdui-card variant="outlined" id="frogstomachsize-section" style="border-radius: 20px; background-color: #00000000;">
+                                <mdui-collapse value="opened">
+                                    <mdui-collapse-item value="opened">
+                                        <md-list-item slot="header" style="user-select: none; display: flex; justify-content: space-between;">
+                                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                                <p style="margin-right: 10px;">Frog Stomach Size</p>
+                                                <md-outlined-text-field placeholder="0" style="height: 50px; width: 100px" type="number" name="frogstomachsize" id="frogstomachsize" name="frogstomachsize"></md-outlined-text-field>
+                                            </div>
+                                        </md-list-item>
+                                    </mdui-collapse-item>
+                                </mdui-collapse>
+                            </mdui-card>
                             <mdui-card variant="outlined" id="time-section" style="display: none; border-radius: 20px; background-color: #00000000;">
                                 <mdui-collapse value="opened">
                                     <mdui-collapse-item value="opened">
@@ -333,17 +345,6 @@
                                     </mdui-collapse-item>
                                 </mdui-collapse>
                             </mdui-card><br>
-                            <mdui-card variant="outlined" style="border-radius: 20px; background-color: #00000000;">
-                                <mdui-collapse value="opened">
-                                    <mdui-collapse-item value="opened">
-                                        <md-list-item slot="header" style="user-select: none; display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                                <p>Disable Starting Booster</p>
-                                                <mdui-checkbox id="disablebooster"></mdui-checkbox>
-                                            </div>
-                                        </md-list-item>
-                                    </mdui-collapse-item>
-                                </mdui-collapse>
                             </mdui-card><br>
                             <mdui-card class="dreamworld-card" style="border-radius: 20px; background-color: #00000000;">
                                 <mdui-collapse value="opened">
@@ -432,34 +433,6 @@
                                                 <md-outlined-button onclick="addMixerOption()">Add Mixer blocker</md-outlined-button>
                                             </div>
                                             <div id="mixeroptions">
-                                            </div>
-                                        </div>
-                                    </mdui-collapse-item>
-                                </mdui-collapse>
-                            </mdui-card><br>
-                            <mdui-card variant="outlined" style="border-radius: 20px; background-color: #00000000;">
-                                <mdui-collapse value="opened">
-                                    <mdui-collapse-item value="opened">
-                                        <md-list-item slot="header" type="link" style="user-select: none; display: flex; place-items: center; align-items: center;">Candy Cobra <span class="beta-text">BETA</span> <md-icon slot="end">keyboard_arrow_down</md-icon></md-list-item>
-                                        <div id="candy-cobra-section" style="display: block;">
-                                            <div class="sideoptions">
-                                                <md-list-item style="background-color: var(--md-sys-color-secondary-container); border-radius: 15px;" type="text" md-list-item="">
-                                                    <md-icon slot="start" aria-hidden="true">warning</md-icon>If you don't have a property created but you see <code>"candyCobras":3</code> then delete it, if the code format is incorrect then please remove the parentheses and change from 0.1 to 0,1 (change the dot to comma)
-                                                </md-list-item>
-                                                <div class="break"></div>
-                                                <br>
-                                                <md-outlined-text-field type="number" label="From tile number" placeholder="0" id="startTileCobra"></md-outlined-text-field>
-                                                <div class="break"></div>
-                                                <br>
-                                                <md-outlined-text-field type="number" label="Candy Cobra Layer (1-5)" placeholder="0" id="cobraLayer"></md-outlined-text-field>
-                                                <div class="break"></div>
-                                                <br>
-                                                <md-outlined-text-field type="number" label="To tile number" placeholder="0" id="endTileCobra"></md-outlined-text-field>
-                                                <div class="break"></div>
-                                                <br>
-                                                <md-outlined-button id="addProperty" onclick="addCobraProperty()">Add Candy Cobra Property</md-outlined-button>
-                                            </div>
-                                            <div id="cobraproperty">
                                             </div>
                                         </div>
                                     </mdui-collapse-item>
@@ -1048,7 +1021,8 @@
                             </mdui-collapse-item>
                         </mdui-collapse>
                     </div>
-                    <p>Tip: If your level is successfully imported but there still an error, you can ignore the error and close this dialog.</p>
+                    <p>Error: An error occured! Please try again. If it still shows an error, make a issue on GitHub or a Ticket on Discord.
+                    Tip: If your level is successfully imported but there still an error, you can ignore the error and close this dialog.</p>
                     <md-text-button slot="action" class="cancel" form="form-id">Close</md-text-button>
                     <md-filled-button slot="action" class="import-btn" onclick="importLevelUI()">Import</md-filled-button>
                 </mdui-dialog>
@@ -1076,8 +1050,12 @@
                                 <mdui-avatar src="avatar-generic.png" slot="start"></mdui-avatar>Candy Crush Gemer
                                 <div slot="supporting-text">Redesigning and remaking the tool</div>
                             </md-list-item>
+                            <md-list-item>
+                                <mdui-avatar src="mystic_pfp_penguin.jpg" slot="start"></mdui-avatar>MysticCCS
+                                <div slot="supporting-text">Forked it for my Candy Crush Saga Flash Reborn project. Added custom blockers and elements for it. Also the owner of the editor you're using right now!</div>
+                            </md-list-item>
                             <md-divider inset></md-divider>
-                            <md-list-item type="link" href="https://discord.gg/kqq5Tx4XcM" target="_blank">
+                            <md-list-item type="link" href="" target="_blank">
                                 <img src="discord.svg" slot="start" width="32px" alt="">Join Discord for supports and discussions! <md-icon slot="end">open_in_new</md-icon>
                             </md-list-item>
                         </md-list>
@@ -1097,7 +1075,7 @@
                 <forge-dialog aria-labelledby="dialog-title" preset="bottom-sheet" class="export-dialog" style="--forge-dialog-shape: 20px; --forge-dialog-background: rgb(var(--mdui-color-surface-container-low)); --forge-dialog-elevation: 0;">
                     <forge-scaffold id="levelResult" style="padding: 20px; display: none;">
                       <h1 class="forge-typography--heading4" id="dialog-title" slot="header">
-                          Level exported successfully!
+                          Level exported successfully! Have fun!
                       </h1>
                       <form slot="body" id="form-id" method="dialog">
                           <p>Your level code:</p>
@@ -1159,7 +1137,7 @@
                     <forge-scaffold id="fakeLoading" style="padding: 20px;">
                         <div slot="body" style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
                             <mat-circular-progress></mat-circular-progress>
-                            <p>Generating your level code...</p>
+                            <p>Generating your level code... Please Wait!</p>
                         </div>
                     </forge-scaffold>
                 </forge-dialog>
@@ -1176,7 +1154,7 @@
                             <mdui-layout-main>
                                 <md-list>
                                     <md-list-item>
-                                        Enable dark mode
+                                        Enable dark mode (experimental)
                                         <forge-switch id="switchDark" icon="none" slot="end" style="--forge-switch-track-on-color: var(--md-sys-color-inverse-primary); --forge-switch-handle-on-color: var(--md-sys-color-primary);"></forge-switch>
                                     </md-list-item>
                                     <md-divider></md-divider>
@@ -1243,15 +1221,9 @@
                                             </div>
                                         </mdui-collapse-item>
                                     </mdui-collapse>
-                                    <md-divider></md-divider>
-                                    <md-list-item type="link" href="https://forms.gle/XMkahmBmzxN2HUEN9" target="_blank">
-                                        Bug report
-                                        <md-icon slot="end">open_in_new</md-icon>
-                                    </md-list-item>
-                                    <md-divider></md-divider>
                                     <md-list-item>
                                         <md-icon slot="start">info</md-icon>
-                                        Version 1.8.1
+                                        Version Pre-Alpha, Build 1000, Based on Version 1.8.1
                                         <forge-button id="checkUpdates" slot="end" style="--forge-button-background: var(--md-sys-color-primary); --forge-button-color: var(--md-sys-color-on-primary);">Check for updates</forge-button>
                                         <forge-button slot="end" style=" --forge-button-color: var(--md-sys-color-primary);">View changelogs</forge-button>
                                     </md-list-item>
