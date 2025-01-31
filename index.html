@@ -1,5 +1,7 @@
 <html>
     <!-- Download stuff -->
+    <!-- Version Alpha, Build 100 (Owl), Based on CCS-Level-Editor 1.8.1. -->
+      <!-- This ia not the stable verison. Expect bugs and glitches. You can report them to me on Github or Discord (mysticccs0 or the coming soon™️ discord server). -->
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
         <meta charset="utf-8">
@@ -13,7 +15,7 @@
         <meta content="Level editor for candy crush that can be used to export levels in your browser" property="og:description">
         <meta content="Candy Crush Level Editor" property="og:site_name">
         <meta name="google-site-verification" content="6zm1HJRG6NhdZesBE-6ZfphnUfd5-FUnh3X80hrWDHY" />
-        <version>1.8.1</version>
+        <version>1</version>
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />
@@ -117,9 +119,6 @@
                     <md-icon slot="start">folder</md-icon>Open a level
                 </md-list-item>
                 <br>
-                <md-list-item type="link" href="https://drive.usercontent.google.com/download?id=1DsI9hi_z5MeB9Xw1AxyMU3q5xfoyOMJo&export=download&authuser=0" style="background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); border-radius: 20px; user-select: none;" md-list-item="">
-                    <md-icon slot="start" aria-hidden="true">download</md-icon>Download editor for Windows
-                </md-list-item>
                 <div class="navd-end" style="position: absolute; bottom: 15;"> 
                     <md-icon-button class="settings-btn"><md-icon>settings</md-icon></md-icon-button>
                     <p style="font-size: smaller;">© Copyright 2025. Made with ❤️ by Blakiemon and other people.
@@ -209,12 +208,6 @@
                                                 <!-- <label class='DroidSans' style="color: #5e2232; text-align: center;">Timed</label> -->
                                                 <input type="radio" id="timedoption" name="leveltype" value="Classic">
                                             </label>
-                                            <label class="leveltypelabel" for="rainbowrapidsoption" style="margin: 5px;" onclick="selectMode()">
-                                                <img src="ui/playmode_icon_rainbowrapids.png" style="max-width: 30px; max-height: 30px;">
-                                                <div class="break"></div>
-                                                <!-- <label class='DroidSans' style="color: #5e2232; text-align: center;">Rainbow Rapids</label> -->
-                                                <input type="radio" id="rainbowrapidsoption" name="leveltype" value="Rainbow Rapids">
-                                            </label>
                                             <label class="leveltypelabel" for="jellyorderoption" style="margin: 5px;" onclick="selectMode()">
                                                 <img src="ui/playmode_icon_jellyorder.png" style="max-width: 30px; max-height: 30px;">
                                                 <div class="break"></div>
@@ -232,24 +225,6 @@
                                                 <div class="break"></div>
                                                 <!-- <label class='DroidSans' style="color: #5e2232; text-align: center;">Order Ingredients</label> -->
                                                 <input type="radio" id="orderingredientsoption" name="leveltype" value="Order Drop Down">
-                                            </label>
-                                            <label class="leveltypelabel" for="rainbowjellyoption" style="margin: 5px;" onclick="selectMode()">
-                                                <img src="ui/playmode_icon_rainbowjelly.png" style="max-width: 30px; max-height: 30px;">
-                                                <div class="break"></div>
-                                                <!-- <label class='DroidSans' style="color: #5e2232; text-align: center;">Rainbow Rapids Jelly</label> -->
-                                                <input type="radio" id="rainbowjellyoption" name="leveltype" value="Rainbow Rapids Jelly">
-                                            </label>
-                                            <label class="leveltypelabel" for="rainbowingredientsoption" style="margin: 5px;" onclick="selectMode()">
-                                                <img src="ui/playmode_icon_rainbowdrop.png" style="max-width: 30px; max-height: 30px;">
-                                                <div class="break"></div>
-                                                <!-- <label class='DroidSans' style="color: #5e2232; text-align: center;">Rainbow Rapids Ingredients</label> -->
-                                                <input type="radio" id="rainbowingredientsoption" name="leveltype" value="Rainbow Rapids Drop Down">
-                                            </label>
-                                            <label class="leveltypelabel" for="rainboworderoption" style="margin: 5px;" onclick="selectMode()">
-                                                <img src="ui/playmode_icon_rainboworder.png" style="max-width: 30px; max-height: 30px;">
-                                                <div class="break"></div>
-                                                <!-- <label class='DroidSans' style="color: #5e2232; text-align: center;">Rainbow Rapids Order</label> -->
-                                                <input type="radio" id="rainboworderoption" name="leveltype" value="Rainbow Rapids Order">
                                             </label>
                                             <label class="leveltypelabel" for="jellytimeoption" style="margin: 5px;" onclick="selectMode()">
                                                 <img src="ui/playmode_icon_jellytime.png" style="max-width: 30px; max-height: 30px;">
