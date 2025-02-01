@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Level Editor</title>
+    <link rel="icon" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- MDUI v1 for Waterfox Classic compatibility -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+
+    <!-- Open Graph / SEO -->
+    <meta content="Candy Crush Level Editor" property="og:title">
+    <meta content="Level editor for candy crush that can be used to export levels in your browser" property="og:description">
+    <meta content="Candy Crush Level Editor" property="og:site_name">
+    <meta name="google-site-verification" content="6zm1HJRG6NhdZesBE-6ZfphnUfd5-FUnh3X80hrWDHY" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- Google Fonts / Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Device Redirection (using DOMContentLoaded) -->
+    <script type="text/javascript">
+      function isMobileDevice() {
+        return /Mobi|Android/i.test(navigator.userAgent);
+      }
+      function isTabletOrDesktop() {
+        return !isMobileDevice() || (window.innerWidth >= 768);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        var currentPath = window.location.pathname;
+        console.log("Current Path:", currentPath);
+        if (isMobileDevice() && currentPath.endsWith("index.html")) {
+          console.log("Redirecting to index-mobile.html");
+          location.assign("index-mobile.html");
+        } else if (isTabletOrDesktop() && currentPath.endsWith("index-mobile.html")) {
+          console.log("Redirecting to index.html");
+          location.assign("index.html");
+        }
+      });
+    </script>
+
+    <!-- Waterfox Classic Check -->
+    <script type="text/javascript">
+      if (navigator.userAgent.indexOf("Waterfox") !== -1) {
+        alert("The new editor is not supported on your browser! Click \"Ok\" to go back to the old site.");
+        window.location.href = "https://mysticccs.github.io/CandyCrushSagaFR";
+      }
+    </script>
+  </head>
+  <body class="mdui-container" style="margin: 0;">
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="mdui-overlay" style="display: flex; flex-direction: column; justify-content: center; align-items: center; position: fixed; width: 100%; height: 100%; background: #fff; z-index: 9999;">
+      <div class="mdui-spinner mdui-spinner-colorful"></div>
+      <p>Editor is loading, please wait...</p>
+    </div>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(){
+        document.body.classList.add("fade-in");
+        setTimeout(function(){
+          document.getElementById("loadingOverlay").style.display = "none";
+        }, 1000);
+      });
+    </script>
+
+    <!-- Navigation Drawer (Left Side Panel) -->
+    <div id="navDrawer" class="mdui-drawer" style="width: 250px;">
+      <div class="mdui-list">
+        <div class="mdui-list-item mdui-ripple">
+          <i class="mdui-icon material-icons">close</i>
+          <span class="mdui-list-item-title">Welcome to Level Editor!</span>
+        </div>
+        <div class="mdui-list-item mdui-ripple" id="newLevelBtn">
+          <i class="mdui-icon material-icons">add</i>
+          <span class="mdui-list-item-title">Create new level</span>
+        </div>
+        <div class="mdui-list-item mdui-ripple" id="openLevelBtn">
+          <i class="mdui-icon material-icons">folder</i>
+          <span class="mdui-list-item-title">Open a level</span>
+        </div>
+        <div class="mdui-divider"></div>
+        <div class="mdui-list-item mdui-ripple" id="settingsBtn">
+          <i class="mdui-icon material-icons">settings</i>
+          <span class="mdui-list-item-title">Settings</span>
+        </div>
+        <div class="mdui-list-item">
+          <p style="font-size: smaller; margin: 10px;">
+            © Copyright 2025. Made with ❤️ by Blakiemon and others.
+            <a href="https://discord.gg/kqq5Tx4XcM">Discord server</a> • 
+            <a href="https://forms.gle/XMkahmBmzxN2HUEN9">Bug reports</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top App Bar -->
+    <header class="mdui-appbar mdui-appbar-fixed">
+      <div class="mdui-toolbar">
+        <a id="openDrawerBtn" class="mdui-btn mdui-btn-icon" href="javascript:;">
+          <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <img src="logo-horizontal.png" width="90px" alt="Logo">
+        <div class="mdui-toolbar-spacer"></div>
+        <!-- Quick Access Menus -->
+        <div class="mdui-dropdown" mdui-dropdown>
+          <button class="mdui-btn mdui-btn-flat">
+            File <i class="mdui-icon material-icons">arrow_drop_down</i>
+          </button>
+          <ul class="mdui-list">
+            <li id="fileNew" class="mdui-list-item mdui-ripple">New <span class="mdui-list-item-content">Ctrl + L</span></li>
+            <li id="fileOpen" class="mdui-list-item mdui-ripple">Open <span class="mdui-list-item-content">Ctrl + O</span></li>
+            <li class="mdui-divider"></li>
+            <li id="fileExport" class="mdui-list-item mdui-ripple">Export level <span class="mdui-list-item-content">Ctrl + S</span></li>
+            <li id="fileImport" class="mdui-list-item mdui-ripple">Import level <span class="mdui-list-item-content">Ctrl + I</span></li>
+          </ul>
+        </div>
+        <div class="mdui-dropdown" mdui-dropdown>
+          <button class="mdui-btn mdui-btn-flat">
+            Help <i class="mdui-icon material-icons">arrow_drop_down</i>
+          </button>
+          <ul class="mdui-list">
+            <li class="mdui-list-item mdui-ripple"><a href="document.html" target="_blank">Documentation <span class="mdui-list-item-content">Alt + M</span></a></li>
+            <li id="aboutBtn" class="mdui-list-item mdui-ripple">About <span class="mdui-list-item-content">Ctrl + B</span></li>
+            <li id="keyboardShortcutsBtn" class="mdui-list-item mdui-ripple">Keyboard shortcuts <span class="mdui-list-item-content">Ctrl + K</span></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main style="margin-top: 64px;">
+      <div class="mdui-row">
+        <!-- Left Panel: Configuration Options -->
+        <div class="mdui-col-md-4">
+          <div class="mdui-card mdui-shadow-3" style="margin: 10px; padding: 10px;">
+            <h2>Configuration</h2>
+            
+            <!-- Game Modes -->
+            <div class="mdui-list">
+              <div class="mdui-list-item mdui-ripple" onclick="selectMode('moves')">
+                <img src="ui/playmode_icon_moves.png" style="max-width: 30px; margin-right:10px;">
+                <span>Moves</span>
+                <input type="radio" name="leveltype" value="Classic moves" checked style="margin-left:auto;">
+              </div>
+              <div class="mdui-list-item mdui-ripple" onclick="selectMode('jelly')">
+                <img src="ui/playmode_icon_jelly.png" style="max-width: 30px; margin-right:10px;">
+                <span>Light up</span>
+                <input type="radio" name="leveltype" value="Light up" style="margin-left:auto;">
+              </div>
+              <div class="mdui-list-item mdui-ripple" onclick="selectMode('ingredients')">
+                <img src="ui/playmode_icon_drop.png" style="max-width: 30px; margin-right:10px;">
+                <span>Drop down</span>
+                <input type="radio" name="leveltype" value="Drop down" style="margin-left:auto;">
+              </div>
+              <div class="mdui-list-item mdui-ripple" onclick="selectMode('order')">
+                <img src="ui/playmode_icon_order.png" style="max-width: 30px; margin-right:10px;">
+                <span>Order</span>
+                <input type="radio" name="leveltype" value="Order" style="margin-left:auto;">
+              </div>
+              <div class="mdui-list-item mdui-ripple" onclick="selectMode('timed')">
+                <img src="ui/playmode_icon_time.png" style="max-width: 30px; margin-right:10px;">
+                <span>Classic</span>
+                <input type="radio" name="leveltype" value="Classic" style="margin-left:auto;">
+              </div>
+              <!-- Additional game modes can be added here -->
+            </div>
+            
+            <!-- Moves Section -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <div class="mdui-row">
+                <div class="mdui-col-xs-6"><p>Moves</p></div>
+                <div class="mdui-col-xs-6">
+                  <input type="number" placeholder="20" id="moves" class="mdui-textfield-input">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Time Section (hidden by default) -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px; display:none;" id="time-section">
+              <div class="mdui-row">
+                <div class="mdui-col-xs-6"><p>Time (seconds)</p></div>
+                <div class="mdui-col-xs-6">
+                  <input type="number" placeholder="30" id="time" class="mdui-textfield-input">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Preferred Colors -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <p>Preferred colors</p>
+              <div>
+                <button class="mdui-btn mdui-btn-raised preferred preferredselected" value="0" onclick="togglePreferred(this)">
+                  <img src="elements/blue.png" style="max-width:30px;">
+                </button>
+                <button class="mdui-btn mdui-btn-raised preferred preferredselected" value="1" onclick="togglePreferred(this)">
+                  <img src="elements/green.png" style="max-width:30px;">
+                </button>
+                <button class="mdui-btn mdui-btn-raised preferred preferredselected" value="2" onclick="togglePreferred(this)">
+                  <img src="elements/orange.png" style="max-width:30px;">
+                </button>
+                <button class="mdui-btn mdui-btn-raised preferred preferredselected" value="3" onclick="togglePreferred(this)">
+                  <img src="elements/purple.png" style="max-width:30px;">
+                </button>
+                <button class="mdui-btn mdui-btn-raised preferred preferredselected" value="4" onclick="togglePreferred(this)">
+                  <img src="elements/red.png" style="max-width:30px;">
+                </button>
+                <button class="mdui-btn mdui-btn-raised preferred" value="5" onclick="togglePreferred(this)">
+                  <img src="elements/yellow.png" style="max-width:30px;">
+                </button>
+              </div>
+            </div>
+            
+            <!-- Score Targets -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <p>Score targets</p>
+              <div class="mdui-row">
+                <div class="mdui-col-xs-6">
+                  <img src="ui/hud/hud_scoreStar_red.png" style="width:25px;"> Star 1
+                </div>
+                <div class="mdui-col-xs-6">
+                  <input type="number" placeholder="1000" id="star1" class="mdui-textfield-input">
+                </div>
+              </div>
+              <div class="mdui-row">
+                <div class="mdui-col-xs-6">
+                  <img src="ui/hud/hud_scoreStar_green.png" style="width:25px;"> Star 2
+                </div>
+                <div class="mdui-col-xs-6">
+                  <input type="number" placeholder="2000" id="star2" class="mdui-textfield-input">
+                </div>
+              </div>
+              <div class="mdui-row">
+                <div class="mdui-col-xs-6">
+                  <img src="ui/hud/hud_scoreStar_yellow.png" style="width:25px;"> Star 3
+                </div>
+                <div class="mdui-col-xs-6">
+                  <input type="number" placeholder="3000" id="star3" class="mdui-textfield-input">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Disable Starting Booster -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <div class="mdui-row" style="align-items:center;">
+                <div class="mdui-col-xs-8"><p>Disable Starting Booster</p></div>
+                <div class="mdui-col-xs-4">
+                  <input type="checkbox" id="disablebooster">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Dreamworld Options -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <div class="mdui-row" style="align-items:center;">
+                <div class="mdui-col-xs-8"><p>Dreamworld?</p></div>
+                <div class="mdui-col-xs-4">
+                  <input type="checkbox" id="isOwlModeEnabled" onchange="toggleDreamworld(this)">
+                </div>
+              </div>
+              <div id="dreamworldoptions" style="display:none; margin-top:10px;">
+                <input type="number" placeholder="Moves until Moonstruck (5)" id="initialMovesUntilMoonStruck" class="mdui-textfield-input" style="margin-bottom:10px;">
+                <input type="number" placeholder="Moonstruck length (3)" id="initialMovesDuringMoonStruck" class="mdui-textfield-input" style="margin-bottom:10px;">
+                <input type="number" placeholder="Max scale difference (10)" id="maxAllowedScaleDiff" class="mdui-textfield-input">
+              </div>
+            </div>
+            
+            <!-- Candy Cannon Options -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <p>Candy Cannon</p>
+              <table class="mdui-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Max</th>
+                    <th>Interval</th>
+                    <th>Tick</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src="elements/cannon_block_waffle.png" style="max-width:70%;">
+                    </td>
+                    <td>
+                      <input type="number" placeholder="0" class="mdui-textfield-input" id="maxNumIngredientsOnScreen">
+                    </td>
+                    <td>
+                      <input type="number" placeholder="0" class="mdui-textfield-input" id="ingredientSpawnDensity">
+                    </td>
+                    <td><!-- Tick not applicable --></td>
+                  </tr>
+                  <!-- Additional cannon rows can be added here -->
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Mixer Options -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <p>Mixer Options</p>
+              <input type="number" placeholder="Max blocker (0)" id="evilSpawnerAmount" class="mdui-textfield-input" style="margin-bottom:10px;">
+              <input type="number" placeholder="Spawn interval (0)" id="evilSpawnerInterval" class="mdui-textfield-input" style="margin-bottom:10px;">
+              <button class="mdui-btn mdui-btn-raised mdui-color-theme" onclick="addMixerOption()">Add Mixer blocker</button>
+              <div id="mixeroptions"></div>
+            </div>
+            
+            <!-- Candy Cobra Options -->
+            <div class="mdui-card mdui-shadow-1" style="margin:10px; padding:10px;">
+              <p>Candy Cobra <span style="color:red;">BETA</span></p>
+              <p>If you see <code>"candyCobras":3</code> without a property created, delete it. Adjust code (e.g., change 0.1 to 0,1) if necessary.</p>
+              <input type="number" placeholder="From tile number" id="startTileCobra" class="mdui-textfield-input" style="margin-bottom:10px;">
+              <input type="number" placeholder="Candy Cobra Layer (1-5)" id="cobraLayer" class="mdui-textfield-input" style="margin-bottom:10px;">
+              <input type="number" placeholder="To tile number" id="endTileCobra" class="mdui-textfield-input" style="margin-bottom:10px;">
+              <button class="mdui-btn mdui-btn-raised mdui-color-theme" id="addProperty" onclick="addCobraProperty()">Add Candy Cobra Property</button>
+              <div id="cobraproperty"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Panel: Elements List -->
+        <div class="mdui-col-md-8">
+          <div class="mdui-card mdui-shadow-3" style="margin:10px; padding:10px;">
+            <h2>Elements</h2>
+            
+            <!-- Colors Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">color_lens</i>
+                  <div class="mdui-panel-item-title">Colors</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'random')">
+                        <img src="elements/random_ui.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'red')">
+                        <img src="elements/red.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'orange')">
+                        <img src="elements/orange.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'yellow')">
+                        <img src="elements/yellow.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'green')">
+                        <img src="elements/green.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'blue')">
+                        <img src="elements/blue.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateColor(this, 'purple')">
+                        <img src="elements/purple.png" style="width:100%;">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Candies Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">cake</i>
+                  <div class="mdui-panel-item-title">Candies</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'random', 'normal')">
+                        <img src="elements/random.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional candy elements (striped, wrapped, etc.) should be added here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Frog Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">adb</i>
+                  <div class="mdui-panel-item-title">Frog</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'frog', 'normal')">
+                        <img src="elements/frog.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional frog elements can be added here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Tiles Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">view_quilt</i>
+                  <div class="mdui-panel-item-title">Tiles</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'none', 'tile')">
+                        <img src="elements/none_UI.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'empty', 'tile')">
+                        <img src="elements/empty_UI.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional tile elements go here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Blockers Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">block</i>
+                  <div class="mdui-panel-item-title">Blockers</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <!-- Example blocker element -->
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'block_frosting', 'normal')">
+                        <img src="elements/block_frosting.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- More blocker elements can be added similarly -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Locks Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">lock</i>
+                  <div class="mdui-panel-item-title">Locks</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <!-- Example lock element -->
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'licorice', 'lock')">
+                        <img src="elements/licorice.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- More locks go here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Shields Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">security</i>
+                  <div class="mdui-panel-item-title">Shields</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'glass_tile_1', 'glass')">
+                        <img src="elements/glass_tile_1.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional shield elements -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Candy Cannon Elements Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">casino</i>
+                  <div class="mdui-panel-item-title">Candy Cannon</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'candy_cannon', 'candy_cannon')">
+                        <img src="elements/candy_cannon.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- More candy cannon elements -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Ingredients Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">local_dining</i>
+                  <div class="mdui-panel-item-title">Ingredients</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'cherry', 'normal')">
+                        <img src="elements/cherry.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- More ingredient elements -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Walls Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">view_array</i>
+                  <div class="mdui-panel-item-title">Walls</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'wall_down', 'walldown')">
+                        <img src="elements/wall_down_ui.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'wall_up', 'wallup')">
+                        <img src="elements/wall_up_ui.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'wall_left', 'wallleft')">
+                        <img src="elements/wall_left_ui.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'wall_right', 'wallright')">
+                        <img src="elements/wall_right_ui.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional destructible and licorice walls can be added here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Mixers Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">sync</i>
+                  <div class="mdui-panel-item-title">Mixers</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'chocolate_spawner', 'normal')">
+                        <img src="elements/chocolate_spawner.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional mixer elements -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Bon Bon Blitz Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">star</i>
+                  <div class="mdui-panel-item-title">Bon Bon Blitz</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-3">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'bonbon_colorbomb_1', 'normal')">
+                        <img src="elements/bonbon_colorbomb_1.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional Bon Bon elements -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Rainbow Rapids Paths Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">water</i>
+                  <div class="mdui-panel-item-title">Rainbow Rapids Paths</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'rainbow_rapid_cannon_top', 'rainbow_cannon_top')">
+                        <img src="elements/rainbow_rapid_cannon_top.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <!-- Additional rainbow rapid elements -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Gumball Machine Section -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">toys</i>
+                  <div class="mdui-panel-item-title">Gumball Machine</div>
+                </div>
+                <div class="mdui-expansion-panel-item-body">
+                  <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'gumball_machine_empty', 'normal')">
+                        <img src="elements/gumball_machine_empty.png" style="width:100%;">
+                      </button>
+                    </div>
+                    <div class="mdui-col-xs-6">
+                      <button class="mdui-btn mdui-btn-raised" onclick="updateSelection(this, 'gumball_machine', 'normal')">
+                        <img src="elements/gumball_machine.png" style="width:100%;">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Teleporter Section (In Progress) -->
+            <div class="mdui-expansion-panel" mdui-expansion-panel>
+              <div class="mdui-expansion-panel-item">
+                <div class="mdui-expansion-panel-item-header">
+                  <i class="mdui-icon material-icons">compare_arrows</i>
+                  <div class="mdui-panel-item-title">Teleporter <small>(In progress)</small></div>
+                </div>
+                <div class="mdui-expansion-panel-item-body" style="filter: blur(20px); pointer-events: none;">
+                  <p>Entry Coordinate</p>
+                  <input type="number" id="entryCoordinate" placeholder="0,0,14" class="mdui-textfield-input" style="margin-bottom:10px;">
+                  <p>Exit Coordinate</p>
+                  <input type="number" id="exitCoordinate" placeholder="0,0,14" class="mdui-textfield-input" style="margin-bottom:10px;">
+                  <button id="addTeleporters" class="mdui-btn mdui-btn-raised mdui-color-theme">Add teleporter</button>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Placeholder JavaScript functions -->
+    <script type="text/javascript">
+      // Function to select game mode
+      function selectMode(mode) {
+        console.log("Mode selected:", mode);
+      }
+      // Toggle preferred color button
+      function togglePreferred(button) {
+        button.classList.toggle("preferredselected");
+      }
+      // Update color selection
+      function updateColor(button, color) {
+        console.log("Color updated to:", color);
+      }
+      // Update element selection
+      function updateSelection(button, element, layer) {
+        console.log("Selected element:", element, "on layer:", layer);
+      }
+      // Add a mixer option (to be implemented)
+      function addMixerOption() {
+        console.log("Add mixer option triggered");
+      }
+      // Add a candy cobra property (to be implemented)
+      function addCobraProperty() {
+        console.log("Add candy cobra property triggered");
+      }
+      // Toggle Dreamworld options visibility
+      function toggleDreamworld(checkbox) {
+        var options = document.getElementById("dreamworldoptions");
+        options.style.display = checkbox.checked ? "block" : "none";
+      }
+      
+      // Event listeners for opening/closing the drawer
+      document.getElementById("openDrawerBtn").addEventListener("click", function(){
+        mdui.drawer("#navDrawer").open();
+      });
+    </script>
+  </body>
+</html>
