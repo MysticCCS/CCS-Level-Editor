@@ -1,6 +1,6 @@
 # CCS-Level-Editor
 
-Camary builds for the modern Candy Crush Saga Flash Reborn editor. Compatible with Modern Browsers.
+Camary builds for the modern Candy Crush Saga Flash Reborn editor. Compatible with Modern Browsers. Not compatible with Waterfox. Waterfox users will be redirected to the classic editor
 
 New update in this version! We added some sweet features!
 
@@ -19,7 +19,7 @@ Background image coming soon!!!
 
 # CREDITS:
 
-This editor was made by Blaki, Fence, Candy Crush Gemer, and Mysitc.
+This editor was made by Blaki, Fence, Candy Crush Gemer, and MysticCCS.
 You may feel free to fork it and do what you like with it as long as you credit King and the people mentioned above.
 
 All other info below does not need to be included.
